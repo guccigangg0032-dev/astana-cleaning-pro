@@ -1,57 +1,40 @@
+
 'use strict';
-const phone = '77776146664';
-const tariffs = {
-  maintenance: {title:'Поддерживающая уборка',rate:400,min:18000},
-  general: {title:'Генеральная уборка',rate:900,min:38000},
-  renovation: {title:'Уборка после ремонта',rate:1200,min:52000}
-};
-const byId=(id)=>document.getElementById(id);
-const money=(n)=>n.toLocaleString('ru-RU')+' ₸';
-function getEstimate(){
-  const type=document.querySelector('input[name="service"]:checked')?.value || 'general';
-  const tariff=tariffs[type];
-  const raw=parseInt(byId('area').value,10);
-  const area=Number.isFinite(raw)?Math.min(2000,Math.max(20,raw)):55;
-  const floor=Math.max(tariff.min,area*tariff.rate);
-  const sofa=byId('addonSofa').checked?10000:0;
-  const chair=byId('addonChair').checked?5500:0;
-  const windows=byId('addonWindows').checked?3000:0;
-  const appliances=byId('addonAppliances').checked?3000:0;
-  const custom=['addonDiningChairs','addonFire','addonBio'].filter(id=>byId(id).checked).map(id=>({addonDiningChairs:'Химчистка стульев',addonFire:'Уборка после пожара',addonBio:'Специализированная уборка после смерти'})[id]);
-  return {type,tariff,area,floor,sofa,chair,windows,appliances,custom,total:floor+sofa+chair+windows+appliances};
+// Runs only on prices.html. Other pages do not load the calculator script.
+(function(){
+const app=window.ACPro,form=document.getElementById('priceForm');
+if(!app||!form)return;
+const t=app.t,fmt=app.money,byId=id=>document.getElementById(id),p=t.prices;
+const tariffConfig={maintenance:{index:0,rate:400,min:18000},general:{index:1,rate:900,min:38000},renovation:{index:2,rate:1200,min:52000}};
+const extraIds=['addonSofa','addonChair','addonWindows','addonAppliances','addonDiningChairs','addonFire','addonBio'];
+const extraRates=[10000,5500,3000,3000,null,null,null];
+function calc(){
+ const type=document.querySelector('input[name="service"]:checked')?.value||'general';
+ const tariff=tariffConfig[type]||tariffConfig.general;
+ const raw=Number.parseInt(byId('area').value,10);
+ const area=Number.isFinite(raw)?Math.max(20,Math.min(2000,raw)):55;
+ const floor=Math.max(tariff.min,tariff.rate*area);
+ const extras=extraIds.map((id,i)=>({id,i,checked:byId(id).checked,rate:extraRates[i],name:p.addons[i]})).filter(x=>x.checked);
+ const total=floor+extras.reduce((sum,item)=>sum+(item.rate||0),0);
+ const custom=extras.some(x=>x.rate===null);
+ return {type,tariff,area,floor,extras,total,custom};
 }
-function updateEstimate(){
-  const e=getEstimate();
-  byId('priceResult').textContent='от '+money(e.total)+(e.custom.length?' + по запросу':'');
-  byId('priceDetails').textContent=e.tariff.title+' · '+e.area+' м²'+(e.sofa||e.chair||e.windows||e.appliances||e.custom.length?' + дополнительные услуги':'');
+function update(){
+ const e=calc();
+ byId('priceResult').textContent=t.from+' '+fmt(e.total)+(e.custom?' '+p.requestExtra:'');
+ byId('priceDetails').textContent=p.types[e.tariff.index]+' · '+e.area+' м²'+(e.extras.length?' + '+p.more:'');
 }
-function whatsappMessage(){
-  const e=getEstimate();
-  let lines=['Здравствуйте! Хочу уточнить стоимость уборки ASTANA CLEANING PRO.','',
-    'Услуга: '+e.tariff.title,
-    'Площадь: '+e.area+' м²',
-    'Базовый расчёт: от '+money(e.floor)];
-  if(e.sofa)lines.push('Химчистка двухместного дивана: +'+money(e.sofa));
-  if(e.chair)lines.push('Химчистка кресла: +'+money(e.chair));
-  if(e.windows)lines.push('Мытьё окон: от +'+money(e.windows)+' (точная стоимость по запросу)');
-  if(e.appliances)lines.push('Чистка бытовой техники: от +'+money(e.appliances)+' (точная стоимость по запросу)');
-  e.custom.forEach(x=>lines.push(x+': индивидуальный расчёт'));
-  lines.push('Ориентир по сумме: от '+money(e.total)+(e.custom.length?' + услуги с индивидуальным расчётом':''),'',
-    'Пожалуйста, уточните состав работ, доступное время и окончательную стоимость. Могу отправить фотографии помещения.');
-  return 'https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n'));
+function buildMessage(){
+ const e=calc(),lab=p.waLabels;
+ const lines=[t.waHello,'',lab.service+': '+p.types[e.tariff.index],lab.area+': '+e.area+' м²',lab.base+': '+t.from+' '+fmt(e.floor)];
+ for(const extra of e.extras){lines.push(lab.extra+': '+extra.name+' — '+(extra.rate?'+'+fmt(extra.rate):lab.individual))}
+ lines.push(lab.sum+': '+t.from+' '+fmt(e.total)+(e.custom?' '+p.requestExtra:''),'',lab.end);
+ return app.wapp(lines.join('\n'));
 }
-byId('areaRange').addEventListener('input',(event)=>{byId('area').value=event.target.value;updateEstimate();});
-byId('area').addEventListener('input',(event)=>{
-  const n=Number(event.target.value);
-  if(Number.isFinite(n))byId('areaRange').value=String(Math.min(250,Math.max(20,n)));
-  updateEstimate();
-});
-byId('area').addEventListener('blur',(event)=>{event.target.value=String(getEstimate().area);updateEstimate();});
-byId('priceForm').addEventListener('change',updateEstimate);
-byId('sendEstimate').addEventListener('click',()=>{window.open(whatsappMessage(),'_blank','noopener,noreferrer');});
-const toggle=byId('navToggle');const nav=byId('mainNav');
-toggle.addEventListener('click',()=>{const opened=nav.classList.toggle('active');toggle.setAttribute('aria-expanded',String(opened));});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('active');toggle.setAttribute('aria-expanded','false');}));
-document.addEventListener('keydown',(event)=>{if(event.key==='Escape'){nav.classList.remove('active');toggle.setAttribute('aria-expanded','false');}});
-byId('currentYear').textContent=String(new Date().getFullYear());
-updateEstimate();
+byId('areaRange').addEventListener('input',e=>{byId('area').value=e.target.value;update()});
+byId('area').addEventListener('input',e=>{const n=Number(e.target.value);if(Number.isFinite(n))byId('areaRange').value=String(Math.max(20,Math.min(250,n)));update()});
+byId('area').addEventListener('blur',e=>{e.target.value=String(calc().area);update()});
+form.addEventListener('change',update);
+byId('sendEstimate').addEventListener('click',()=>{window.open(buildMessage(),'_blank','noopener,noreferrer')});
+update();
+})();
