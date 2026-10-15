@@ -225,6 +225,26 @@
 .quick-result strong{font-size:36px}
 }
 
+/* Induction enquiries, partner transparency and device-responsive quote forms */
+.hob-alert{border:1px solid #d7e5ed;background:#f4f9fc;border-radius:20px;padding:30px;max-width:1040px;margin:auto}
+.hob-alert h2{font-size:clamp(22px,3vw,30px);margin-bottom:14px}
+.hob-alert p{font-size:14px;line-height:1.85;color:#365569}
+.hob-alert a{display:inline-block;color:#086eb1;font-weight:800;font-size:13px;margin-top:15px}
+.partner-status{max-width:1040px;border-left:4px solid #158fc3;background:#ecf8fc;padding:19px 25px;margin:25px auto 55px;border-radius:0 15px 15px 0}
+.partner-status strong{font-size:16px;color:#0b537f}
+.partner-status p{font-size:13px;line-height:1.7;margin-top:8px}
+.hob-grid{padding-top:10px}
+.hob-price{border:1px solid #b9e2ee;background:#f1fbfd;border-radius:20px;padding:28px;margin-top:28px}
+.hob-price strong{display:block;font-size:clamp(29px,4vw,42px);color:#083e65;overflow-wrap:anywhere;letter-spacing:-.04em}
+.hob-price p{margin-top:13px;line-height:1.75;font-size:14px}
+.partner-cta-link{display:inline-block;font-weight:800;color:#086eb1;text-decoration:underline;text-underline-offset:5px;margin-top:30px}
+.partner-cta-link:hover,.hob-alert a:hover{color:#05486f}
+.application-form select{cursor:pointer}
+.service-page .service-card .service-foot strong{overflow-wrap:anywhere}
+.footer a:hover{color:#2baddd}
+@media(max-width:760px){.hob-alert{padding:23px}.partner-status{margin-bottom:35px}.hob-price{padding:22px}.hob-grid{gap:35px}}
+
+
 /* Human-written structure: headings and real content, no automatic card numbering. */
 .steps-grid .step{padding-top:28px;border-top:2px solid #b5dfea}
 .steps-grid .step h3{margin-top:0;font-weight:800;letter-spacing:-.012em}
