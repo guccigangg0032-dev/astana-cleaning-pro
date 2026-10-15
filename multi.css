@@ -168,3 +168,11 @@
  .estimate #priceResult{font-size:clamp(26px,8vw,39px);letter-spacing:-.035em}
  .service-scope-link{margin-top:-5px}
 }
+
+
+/* Induction cooktop size calculator */
+.hob-size-box{border:1px solid #b9e0f1;background:#eff9fd;border-radius:14px;padding:18px;margin-top:15px}
+.hob-size-box[hidden]{display:none!important}
+.hob-size-box label{display:block;font-size:13px;font-weight:800;margin-bottom:10px;color:#174661}
+.hob-size-box select{display:block;width:100%;border-radius:10px;border:1px solid #acd6e8;padding:12px 13px;background:#fff;color:#154766;font:inherit;font-weight:700}
+.hob-size-box p{font-size:12px;color:#5b7487;line-height:1.65;margin-top:11px}
