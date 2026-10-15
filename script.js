@@ -8,9 +8,16 @@ const tariffConfig={maintenance:{index:0,rate:400,min:18000},general:{index:1,ra
 const extraIds=app.prices.map(x=>x.id),rates=app.prices.map(x=>x.sum);
 const hobRates=[15000,20000,25000];
 const params=new URLSearchParams(window.location.search);
-if(params.get('service')==='extras'){
-  const option=document.querySelector('input[name="service"][value="extras"]');
+const requested=params.get('service');
+if(['maintenance','general','renovation','extras'].includes(requested)){
+  const option=document.querySelector('input[name="service"][value="'+requested+'"]');
   if(option)option.checked=true;
+}
+const prefill=Number.parseInt(params.get('area'),10);
+if(Number.isFinite(prefill)){
+  const floorArea=Math.max(20,Math.min(2000,prefill));
+  byId('area').value=String(floorArea);
+  byId('areaRange').value=String(Math.min(250,floorArea));
 }
 if(params.get('induction')==='1')byId('addonInduction').checked=true;
 function calculate(){
