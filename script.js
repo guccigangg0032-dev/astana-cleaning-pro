@@ -1,57 +1,86 @@
 'use strict';
-const phone = '77776146664';
-const tariffs = {
-  maintenance: {title:'Поддерживающая уборка',rate:400,min:18000},
-  general: {title:'Генеральная уборка',rate:900,min:38000},
-  renovation: {title:'Уборка после ремонта',rate:1200,min:52000}
+// ASTANA CLEANING PRO: transparent estimates; figures are indicative, not final quotations.
+(function(){
+const app=window.ACPro;
+const form=document.getElementById('priceForm');
+if(!app||!form)return;
+const t=app.t, p=t.prices, fmt=app.money, byId=id=>document.getElementById(id);
+const tariffConfig={
+ maintenance:{index:0,rate:400,min:18000},
+ general:{index:1,rate:900,min:38000},
+ renovation:{index:2,rate:1200,min:52000}
 };
-const byId=(id)=>document.getElementById(id);
-const money=(n)=>n.toLocaleString('ru-RU')+' ₸';
-function getEstimate(){
-  const type=document.querySelector('input[name="service"]:checked')?.value || 'general';
-  const tariff=tariffs[type];
-  const raw=parseInt(byId('area').value,10);
-  const area=Number.isFinite(raw)?Math.min(2000,Math.max(20,raw)):55;
-  const floor=Math.max(tariff.min,area*tariff.rate);
-  const sofa=byId('addonSofa').checked?10000:0;
-  const chair=byId('addonChair').checked?5500:0;
-  const windows=byId('addonWindows').checked?3000:0;
-  const appliances=byId('addonAppliances').checked?3000:0;
-  const custom=['addonDiningChairs','addonFire','addonBio'].filter(id=>byId(id).checked).map(id=>({addonDiningChairs:'Химчистка стульев',addonFire:'Уборка после пожара',addonBio:'Специализированная уборка после смерти'})[id]);
-  return {type,tariff,area,floor,sofa,chair,windows,appliances,custom,total:floor+sofa+chair+windows+appliances};
+const extraIds=app.prices.map(x=>x.id);
+const rates=app.prices.map(x=>x.sum);
+const params=new URLSearchParams(window.location.search);
+if(params.get('service')==='extras'){
+ const option=document.querySelector('input[name="service"][value="extras"]');
+ if(option)option.checked=true;
 }
-function updateEstimate(){
-  const e=getEstimate();
-  byId('priceResult').textContent='от '+money(e.total)+(e.custom.length?' + по запросу':'');
-  byId('priceDetails').textContent=e.tariff.title+' · '+e.area+' м²'+(e.sofa||e.chair||e.windows||e.appliances||e.custom.length?' + дополнительные услуги':'');
+
+function calculate(){
+ const type=document.querySelector('input[name="service"]:checked')?.value||'general';
+ const standalone=type==='extras';
+ const tariff=standalone?null:(tariffConfig[type]||tariffConfig.general);
+ const raw=Number.parseInt(byId('area').value,10);
+ const area=Number.isFinite(raw)?Math.max(20,Math.min(2000,raw)):55;
+ const base=standalone?0:Math.max(tariff.min,tariff.rate*area);
+ const extras=extraIds.map((id,i)=>({id,index:i,selected:byId(id).checked,rate:rates[i],name:p.addons[i]})).filter(item=>item.selected);
+ const total=base+extras.reduce((sum,item)=>sum+(item.rate??0),0);
+ const custom=extras.some(item=>item.rate===null);
+ return {type,standalone,tariff,area,base,extras,total,custom,valid:!standalone||extras.length>0};
 }
-function whatsappMessage(){
-  const e=getEstimate();
-  let lines=['Здравствуйте! Хочу уточнить стоимость уборки ASTANA CLEANING PRO.','',
-    'Услуга: '+e.tariff.title,
-    'Площадь: '+e.area+' м²',
-    'Базовый расчёт: от '+money(e.floor)];
-  if(e.sofa)lines.push('Химчистка двухместного дивана: +'+money(e.sofa));
-  if(e.chair)lines.push('Химчистка кресла: +'+money(e.chair));
-  if(e.windows)lines.push('Мытьё окон: от +'+money(e.windows)+' (точная стоимость по запросу)');
-  if(e.appliances)lines.push('Чистка бытовой техники: от +'+money(e.appliances)+' (точная стоимость по запросу)');
-  e.custom.forEach(x=>lines.push(x+': индивидуальный расчёт'));
-  lines.push('Ориентир по сумме: от '+money(e.total)+(e.custom.length?' + услуги с индивидуальным расчётом':''),'',
-    'Пожалуйста, уточните состав работ, доступное время и окончательную стоимость. Могу отправить фотографии помещения.');
-  return 'https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n'));
+function amount(e){
+ if(!e.valid)return p.needOne;
+ if(e.standalone&&e.total===0)return p.quote;
+ return t.from+' '+fmt(e.total)+(e.custom?' '+p.requestExtra:'');
 }
-byId('areaRange').addEventListener('input',(event)=>{byId('area').value=event.target.value;updateEstimate();});
-byId('area').addEventListener('input',(event)=>{
-  const n=Number(event.target.value);
-  if(Number.isFinite(n))byId('areaRange').value=String(Math.min(250,Math.max(20,n)));
-  updateEstimate();
+function update(){
+ const e=calculate();
+ byId('areaGroup').hidden=e.standalone;
+ byId('area').disabled=e.standalone;
+ byId('area').required=!e.standalone;
+ byId('areaRange').disabled=e.standalone;
+ byId('extraNotice').textContent=e.standalone?p.extraLead:p.optional;
+ byId('priceResult').textContent=amount(e);
+ byId('priceDetails').textContent=e.standalone
+   ?(e.extras.length?e.extras.map(x=>x.name).join(' · '):p.needOne)
+   :p.types[e.tariff.index]+' · '+e.area+' м²'+(e.extras.length?' + '+p.more:'');
+ byId('sendEstimate').disabled=!e.valid;
+}
+function makeWhatsAppLink(){
+ const e=calculate();
+ if(!e.valid)return null;
+ const lab=p.waLabels;
+ const lines=[t.waHello,'',lab.service+': '+(e.standalone?p.standalone:p.types[e.tariff.index])];
+ if(!e.standalone){
+   lines.push(lab.area+': '+e.area+' м²');
+   lines.push(lab.base+': '+t.from+' '+fmt(e.base));
+ }
+ for(const extra of e.extras){
+   lines.push(lab.extra+': '+extra.name+' — '+(extra.rate!==null?t.from+' '+fmt(extra.rate):lab.individual));
+ }
+ lines.push(lab.sum+': '+amount(e),'',lab.end);
+ return app.wapp(lines.join('\n'));
+}
+byId('areaRange').addEventListener('input',event=>{
+ byId('area').value=event.target.value;
+ update();
 });
-byId('area').addEventListener('blur',(event)=>{event.target.value=String(getEstimate().area);updateEstimate();});
-byId('priceForm').addEventListener('change',updateEstimate);
-byId('sendEstimate').addEventListener('click',()=>{window.open(whatsappMessage(),'_blank','noopener,noreferrer');});
-const toggle=byId('navToggle');const nav=byId('mainNav');
-toggle.addEventListener('click',()=>{const opened=nav.classList.toggle('active');toggle.setAttribute('aria-expanded',String(opened));});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('active');toggle.setAttribute('aria-expanded','false');}));
-document.addEventListener('keydown',(event)=>{if(event.key==='Escape'){nav.classList.remove('active');toggle.setAttribute('aria-expanded','false');}});
-byId('currentYear').textContent=String(new Date().getFullYear());
-updateEstimate();
+byId('area').addEventListener('input',event=>{
+ const num=Number(event.target.value);
+ if(Number.isFinite(num))byId('areaRange').value=String(Math.max(20,Math.min(250,num)));
+ update();
+});
+byId('area').addEventListener('blur',event=>{
+ event.target.value=String(calculate().area);
+ update();
+});
+form.addEventListener('change',update);
+
+byId('sendEstimate').addEventListener('click',()=>{
+ const href=makeWhatsAppLink();
+ if(href)window.open(href,'_blank','noopener,noreferrer');
+});
+update();
+})();
