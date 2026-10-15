@@ -35,7 +35,13 @@ const scopes=()=>{
 };
 const services=()=>pagehead(t.services.tag,t.services.title,t.services.lead)+'<section class="section service-page"><div class="container"><div class="services-grid">'+t.services.items.map(serviceCard).join('')+'</div><div class="safety-note"><span aria-hidden="true">ⓘ</span><p><strong>'+t.services.safetyTitle+'.</strong> '+t.services.safetyText+'</p></div></div></section>'+scopes()+cta();
 const steps=(arr)=>'<div class="steps-grid">'+arr.map((p,i)=>'<div class="step"><span class="step-number">'+String(i+1).padStart(2,'0')+'</span><h3>'+p[0]+'</h3><p>'+p[1]+'</p></div>').join('')+'</div>';
-const home=()=>'<section class="hero section"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">'+t.home.tag+'</div><h1>'+t.home.title+'<br><em>'+t.home.accent+'</em></h1><p class="hero-lead">'+t.home.intro+'</p><div class="hero-buttons">'+link(t.calculate,href('prices'))+link(t.viewServices,href('services'),'btn btn-secondary')+'</div><div class="hero-points">'+t.home.points.map(x=>'<span>✓ '+x+'</span>').join('')+'</div></div><div class="hero-visual"><img class="hero-room" src="assets/hero-room.svg" alt="Clean living room illustration"></div></div></section>'+
+const home=()=>'<section class="hero section hero-calc"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">'+t.home.tag+'</div><h1>'+t.home.title+'<br><em>'+t.home.accent+'</em></h1><p class="hero-lead">'+t.home.intro+'</p><div class="hero-buttons">'+link(t.viewServices,href('services'),'btn btn-secondary')+'</div><div class="hero-points">'+t.home.points.map(x=>'<span>✓ '+x+'</span>').join('')+'</div></div>'+
+'<div class="hero-calculator"><div class="hero-calc-head"><span class="kicker">'+t.quickEstimate.tag+'</span><h2>'+t.quickEstimate.title+'</h2><p>'+t.quickEstimate.lead+'</p></div>'+
+'<form id="quickForm" class="hero-calc-form" autocomplete="off"><label for="quickService">'+t.quickEstimate.type+'</label><select id="quickService" name="service" required><option value="maintenance">'+t.quickEstimate.types[0]+'</option><option value="general" selected>'+t.quickEstimate.types[1]+'</option><option value="renovation">'+t.quickEstimate.types[2]+'</option></select>'+
+'<label for="quickArea">'+t.quickEstimate.area+'</label><div class="quick-area-group"><input type="number" id="quickArea" name="area" inputmode="numeric" min="20" max="2000" step="1" value="55" required><span>м²</span></div>'+
+'<div class="quick-result" role="status" aria-live="polite"><span>'+t.quickEstimate.price+'</span><strong id="quickPrice">'+money(49500)+'</strong></div>'+
+'<p class="quick-info">'+t.quickEstimate.notice+'</p><button type="submit" class="btn btn-primary quick-submit">'+t.quickEstimate.send+' ↗</button>'+
+'<a class="quick-details" id="quickDetails" href="'+href('prices')+'">'+t.quickEstimate.details+' ↗</a><small class="quick-legal">'+t.quickEstimate.footer+' '+t.quickEstimate.note+'</small></form></div></div></section>'+
 '<section class="services section"><div class="container"><div class="section-head split"><div><span class="kicker">'+t.home.servicesTag+'</span><h2>'+t.home.servicesTitle+'</h2></div><p>'+t.home.servicesLead+'</p></div><div class="services-grid">'+t.services.items.slice(0,6).map(serviceCard).join('')+'</div><div class="section-bottom">'+link(t.viewServices,href('services'),'btn btn-secondary')+'</div></div></section>'+
 '<section class="section home-why"><div class="container"><div class="section-head centered"><h2>'+t.home.whyTitle+'</h2><p>'+t.home.whyLead+'</p></div><div class="feature-grid">'+t.home.whyItems.map((x,i)=>'<div class="feature-card"><span class="feature-icon">'+['✓','◈','✧'][i]+'</span><h3>'+x+'</h3></div>').join('')+'</div></div></section>'+
 '<section class="steps section"><div class="container"><div class="section-head centered"><h2>'+t.home.stepsTitle+'</h2></div>'+steps(t.about.steps)+'</div></section>'+cta();
@@ -147,6 +153,36 @@ function wirePartners(){
   window.open(partnerWapp(text.join('\n')),'_blank','noopener,noreferrer');
  });
 }
+function wireQuickEstimator(){
+ const form=document.getElementById('quickForm');if(!form)return;
+ const svc=document.getElementById('quickService'),areaEl=document.getElementById('quickArea'),out=document.getElementById('quickPrice'),detail=document.getElementById('quickDetails');
+ const plans={maintenance:{rate:400,min:18000,index:0},general:{rate:900,min:38000,index:1},renovation:{rate:1200,min:52000,index:2}};
+ function current(){
+  const service=Object.hasOwn(plans,svc.value)?svc.value:'general';
+  const plan=plans[service];const n=Number.parseInt(areaEl.value,10);
+  const area=Number.isFinite(n)?Math.min(2000,Math.max(20,n)):55;
+  return {service,plan,area,amount:Math.max(plan.min,plan.rate*area)};
+ }
+ function update(){
+  const state=current();
+  out.textContent=money(state.amount);
+  const url=new URL(href('prices'),location.href);
+  url.searchParams.set('service',state.service);
+  url.searchParams.set('area',String(state.area));
+  detail.href=url.href;
+ }
+ svc.addEventListener('change',update);
+ areaEl.addEventListener('input',update);
+ areaEl.addEventListener('blur',()=>{areaEl.value=String(current().area);update()});
+ form.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(!form.reportValidity())return;
+  const v=current(),q=t.quickEstimate;
+  const parts=[q.waIntro,'',q.waLabels[0]+': '+q.types[v.plan.index],q.waLabels[1]+': '+v.area+' м²',q.waLabels[2]+': '+t.from+' '+money(v.amount),'',q.footer,q.notice];
+  window.open(wapp(parts.join('\n')),'_blank','noopener,noreferrer');
+ });
+ update();
+}
 const views={home,services,prices,about,faq,careers,induction,partners,contact};
 document.getElementById('app').innerHTML=header+'<main id="main-content">'+views[page]()+'</main>'+footer;
 document.getElementById('langSelect').value=lang;
@@ -167,4 +203,5 @@ window.ACPro={lang,t,prices:priceItems,money,wapp};
 if(page==='careers')wireCareers();
 if(page==='induction')wireInduction();
 if(page==='partners')wirePartners();
+if(page==='home')wireQuickEstimator();
 })();
