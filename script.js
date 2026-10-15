@@ -12,13 +12,11 @@ const tariffConfig={
 };
 const extraIds=app.prices.map(x=>x.id);
 const rates=app.prices.map(x=>x.sum);
-const hobRates=[15000,20000,25000];
 const params=new URLSearchParams(window.location.search);
 if(params.get('service')==='extras'){
  const option=document.querySelector('input[name="service"][value="extras"]');
  if(option)option.checked=true;
 }
-if(params.get('induction')==='1')byId('addonInduction').checked=true;
 
 function calculate(){
  const type=document.querySelector('input[name="service"]:checked')?.value||'general';
@@ -27,7 +25,7 @@ function calculate(){
  const raw=Number.parseInt(byId('area').value,10);
  const area=Number.isFinite(raw)?Math.max(20,Math.min(2000,raw)):55;
  const base=standalone?0:Math.max(tariff.min,tariff.rate*area);
- const extras=extraIds.map((id,i)=>({id,index:i,selected:byId(id).checked,rate:id==='addonInduction'?(hobRates[Number(byId('hobSize').value)]??hobRates[0]):rates[i],name:p.addons[i]})).filter(item=>item.selected);
+ const extras=extraIds.map((id,i)=>({id,index:i,selected:byId(id).checked,rate:rates[i],name:p.addons[i]})).filter(item=>item.selected);
  const total=base+extras.reduce((sum,item)=>sum+(item.rate??0),0);
  const custom=extras.some(item=>item.rate===null);
  return {type,standalone,tariff,area,base,extras,total,custom,valid:!standalone||extras.length>0};
@@ -40,7 +38,6 @@ function amount(e){
 function update(){
  const e=calculate();
  byId('areaGroup').hidden=e.standalone;
- byId('hobSizeGroup').hidden=!byId('addonInduction').checked;
  byId('area').disabled=e.standalone;
  byId('area').required=!e.standalone;
  byId('areaRange').disabled=e.standalone;
@@ -61,8 +58,7 @@ function makeWhatsAppLink(){
    lines.push(lab.base+': '+t.from+' '+fmt(e.base));
  }
  for(const extra of e.extras){
-   const detail=extra.id==='addonInduction'?' ('+p.hobSizes[Number(byId('hobSize').value)||0]+')':'';
-   lines.push(lab.extra+': '+extra.name+detail+' — '+(extra.rate!==null?t.from+' '+fmt(extra.rate):lab.individual));
+   lines.push(lab.extra+': '+extra.name+' — '+(extra.rate!==null?t.from+' '+fmt(extra.rate):lab.individual));
  }
  lines.push(lab.sum+': '+amount(e),'',lab.end);
  return app.wapp(lines.join('\n'));
@@ -81,7 +77,6 @@ byId('area').addEventListener('blur',event=>{
  update();
 });
 form.addEventListener('change',update);
-byId('hobSize').addEventListener('change',update);
 
 byId('sendEstimate').addEventListener('click',()=>{
  const href=makeWhatsAppLink();
