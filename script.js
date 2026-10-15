@@ -56,7 +56,7 @@ function makeWhatsAppLink(){
   lines.push(lab.extra+': '+item.name+detail+' — '+(item.rate!==null?t.from+' '+fmt(item.rate):lab.individual));
  }
  lines.push(lab.sum+': '+amount(e),'',lab.end);
- return app.wapp(lines.join('\n'));
+ return e.extras.some(x=>x.id==='addonInduction')?'https://wa.me/77760001966?text='+encodeURIComponent(lines.join('\n')):app.wapp(lines.join('\n'));
 }
 byId('areaRange').addEventListener('input',e=>{byId('area').value=e.target.value;update()});
 byId('area').addEventListener('input',e=>{const n=Number(e.target.value);if(Number.isFinite(n))byId('areaRange').value=String(Math.max(20,Math.min(250,n)));update()});
