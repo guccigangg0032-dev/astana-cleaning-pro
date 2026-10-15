@@ -13,6 +13,13 @@ const tariffConfig={
 const extraIds=app.prices.map(x=>x.id);
 const rates=app.prices.map(x=>x.sum);
 const hobRates=[15000,20000,25000];
+const params=new URLSearchParams(window.location.search);
+if(params.get('service')==='extras'){
+ const option=document.querySelector('input[name="service"][value="extras"]');
+ if(option)option.checked=true;
+}
+if(params.get('induction')==='1')byId('addonInduction').checked=true;
+
 function calculate(){
  const type=document.querySelector('input[name="service"]:checked')?.value||'general';
  const standalone=type==='extras';
@@ -74,6 +81,8 @@ byId('area').addEventListener('blur',event=>{
  update();
 });
 form.addEventListener('change',update);
+byId('hobSize').addEventListener('change',update);
+
 byId('sendEstimate').addEventListener('click',()=>{
  const href=makeWhatsAppLink();
  if(href)window.open(href,'_blank','noopener,noreferrer');
