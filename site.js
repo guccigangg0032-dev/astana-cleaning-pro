@@ -105,12 +105,13 @@ form.addEventListener('submit',e=>{
 
 const induction=()=>{
  const v=t.induction;
- const options=(arr)=>arr.map((txt,n)=>'<option value="'+n+'">'+txt+'</option>').join('');
+ const options=arr=>arr.map((txt,n)=>'<option value="'+n+'">'+txt+'</option>').join('');
  return pagehead(v.tag,v.title,v.lead)+
  '<section class="section"><div class="container"><div class="hob-alert"><h2>'+v.warningTitle+'</h2><p>'+v.warning+'</p><a href="https://www.bosch-home.ua/ru/service/podderzhka/steklokeramika-ustranenie-tsarapin" target="_blank" rel="noopener noreferrer">'+v.sourceLabel+' ↗</a></div>'+
  '<div class="partner-status"><strong>'+v.status+'</strong><p>'+v.statusText+'</p></div>'+
- '<div class="application-grid hob-grid"><div><span class="kicker">'+v.calculator+'</span><h2>'+v.calculator+'</h2><p class="application-lead">'+v.leadCalc+'</p><div class="hob-price"><strong id="inductionPrice">'+v.from+' '+money(v.amounts[0])+'</strong><p>'+v.amountNote+'</p></div><a class="partner-cta-link" href="'+href('partners')+'">'+v.partner+' ↗</a></div>'+
- '<form class="application-form" id="inductionForm"><label for="inductionSize">'+v.calculator+'</label><select id="inductionSize" required>'+options(v.sizes)+'</select>'+
+ '<div class="application-grid hob-grid"><div><span class="kicker">'+v.calculator+'</span><h2>'+v.calcTitle+'</h2><p class="application-lead">'+v.estLead+'</p><p class="application-lead">'+v.leadCalc+'</p><a class="partner-cta-link" href="'+href('partners')+'">'+v.partner+' ↗</a></div>'+
+ '<form class="application-form" id="inductionForm"><fieldset class="hob-size-choices" id="inductionSize"><legend>'+v.sizeLabel+'</legend><div class="hob-choice-grid">'+v.sizes.map((name,n)=>'<label class="hob-choice"><input type="radio" name="inductionSize" value="'+n+'" '+(n===0?'checked':'')+' required><span class="hob-choice-name">'+name+'</span><strong>'+money(v.amounts[n])+'</strong></label>').join('')+'</div></fieldset>'+
+ '<div class="hob-price hob-inline-price" role="status" aria-live="polite"><span>'+v.estimateNow+'</span><strong id="inductionPrice">'+v.from+' '+money(v.amounts[0])+'</strong><p>'+v.amountNote+'</p></div>'+
  '<label for="inductionIssue">'+v.condition+'</label><select id="inductionIssue" required>'+options(v.conditions)+'</select>'+
  '<label for="inductionModel">'+v.model+'</label><input id="inductionModel" maxlength="100" placeholder="'+v.modelHint+'">'+
  '<label for="inductionNotes">'+v.notes+'</label><textarea id="inductionNotes" rows="4" maxlength="400" placeholder="'+v.notesHint+'"></textarea>'+
@@ -131,17 +132,20 @@ const partners=()=>{
 };
 function wireInduction(){
  const form=document.getElementById('inductionForm');if(!form)return;
- const v=t.induction,sz=document.getElementById('inductionSize'),out=document.getElementById('inductionPrice');
- sz.addEventListener('change',()=>{out.textContent=v.from+' '+money(v.amounts[Number(sz.value)]||v.amounts[0])});
+ const v=t.induction,out=document.getElementById('inductionPrice');
+ const chosen=()=>{const raw=Number.parseInt(form.querySelector('input[name="inductionSize"]:checked')?.value||'0',10);return Math.max(0,Math.min(2,raw))};
+ function update(){out.textContent=v.from+' '+money(v.amounts[chosen()])}
+ form.addEventListener('change',update);
  form.addEventListener('submit',e=>{
   e.preventDefault();if(!form.reportValidity())return;
-  const val=id=>document.getElementById(id).value.trim(),n=Number(sz.value);
-  const text=[v.waIntro,'',v.waFields[0]+': '+v.sizes[n],v.waFields[1]+': '+v.from+' '+money(v.amounts[n]),v.waFields[3]+': '+v.conditions[Number(val('inductionIssue'))]];
-  if(val('inductionModel'))text.push(v.waFields[2]+': '+val('inductionModel'));
-  if(val('inductionNotes'))text.push(v.waFields[4]+': '+val('inductionNotes'));
-  text.push('',v.amountNote,v.statusText);
-  window.open(partnerWapp(text.join('\n')),'_blank','noopener,noreferrer');
+  const val=id=>document.getElementById(id).value.trim(),n=chosen();
+  const lines=[v.waIntro,'',v.waFields[0]+': '+v.sizes[n],v.waFields[1]+': '+v.from+' '+money(v.amounts[n]),v.waFields[3]+': '+v.conditions[Number(val('inductionIssue'))]];
+  if(val('inductionModel'))lines.push(v.waFields[2]+': '+val('inductionModel'));
+  if(val('inductionNotes'))lines.push(v.waFields[4]+': '+val('inductionNotes'));
+  lines.push('',v.amountNote,v.statusText);
+  window.open(partnerWapp(lines.join('\n')),'_blank','noopener,noreferrer');
  });
+ update();
 }
 function wirePartners(){
  const form=document.getElementById('partnerForm');if(!form)return;const v=t.partners;
