@@ -15,12 +15,15 @@ function getEstimate(){
   const floor=Math.max(tariff.min,area*tariff.rate);
   const sofa=byId('addonSofa').checked?10000:0;
   const chair=byId('addonChair').checked?5500:0;
-  return {type,tariff,area,floor,sofa,chair,total:floor+sofa+chair};
+  const windows=byId('addonWindows').checked?3000:0;
+  const appliances=byId('addonAppliances').checked?3000:0;
+  const custom=['addonDiningChairs','addonFire','addonBio'].filter(id=>byId(id).checked).map(id=>({addonDiningChairs:'Химчистка стульев',addonFire:'Уборка после пожара',addonBio:'Специализированная уборка после смерти'})[id]);
+  return {type,tariff,area,floor,sofa,chair,windows,appliances,custom,total:floor+sofa+chair+windows+appliances};
 }
 function updateEstimate(){
   const e=getEstimate();
-  byId('priceResult').textContent=money(e.total);
-  byId('priceDetails').textContent=e.tariff.title+' · '+e.area+' м²'+(e.sofa||e.chair?' + дополнительные услуги':'');
+  byId('priceResult').textContent='от '+money(e.total)+(e.custom.length?' + по запросу':'');
+  byId('priceDetails').textContent=e.tariff.title+' · '+e.area+' м²'+(e.sofa||e.chair||e.windows||e.appliances||e.custom.length?' + дополнительные услуги':'');
 }
 function whatsappMessage(){
   const e=getEstimate();
@@ -30,7 +33,10 @@ function whatsappMessage(){
     'Базовый расчёт: от '+money(e.floor)];
   if(e.sofa)lines.push('Химчистка двухместного дивана: +'+money(e.sofa));
   if(e.chair)lines.push('Химчистка кресла: +'+money(e.chair));
-  lines.push('Ориентир по сумме: от '+money(e.total),'',
+  if(e.windows)lines.push('Мытьё окон: от +'+money(e.windows)+' (точная стоимость по запросу)');
+  if(e.appliances)lines.push('Чистка бытовой техники: от +'+money(e.appliances)+' (точная стоимость по запросу)');
+  e.custom.forEach(x=>lines.push(x+': индивидуальный расчёт'));
+  lines.push('Ориентир по сумме: от '+money(e.total)+(e.custom.length?' + услуги с индивидуальным расчётом':''),'',
     'Пожалуйста, уточните состав работ, доступное время и окончательную стоимость. Могу отправить фотографии помещения.');
   return 'https://wa.me/'+phone+'?text='+encodeURIComponent(lines.join('\n'));
 }
