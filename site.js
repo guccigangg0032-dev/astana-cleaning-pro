@@ -13,7 +13,7 @@ const t=DATA[lang];document.documentElement.lang=lang;const page=ids.includes(do
 const current=ids.indexOf(page);
 const href=(p)=>pages[ids.indexOf(p)]+(lang==='ru'?'':'?lang='+lang);
 const wapp=(msg)=>'https://wa.me/77776146664?text='+encodeURIComponent(msg||t.waContact);
-const partnerWapp=(msg)=>wapp(msg||t.partners.waIntro);
+const partnerWapp=(msg)=>'https://wa.me/77760001966?text='+encodeURIComponent(msg||t.partners.waIntro);
 const brand='<img src="assets/mark.svg" alt="" width="44" height="44"><span>ASTANA <b>CLEANING PRO</b></span>';
 const link=(txt,url,css='btn btn-primary')=>'<a class="'+css+'" href="'+url+'">'+txt+' <span aria-hidden="true">↗</span></a>';
 const icons=['✦','⌂','✧','◈','◎','◉','▣','▤','◇','✳','≋'];
