@@ -126,3 +126,27 @@
 .application-form button{align-self:stretch;margin-top:12px;white-space:normal;text-align:center}
 @media(max-width:900px){.career-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.application-grid{gap:28px}}
 @media(max-width:640px){.career-grid,.application-grid{grid-template-columns:1fr}.career-card{min-height:0}.career-apply{padding-top:58px}.application-form{padding:23px 19px}.career-terms{padding:50px 0}}
+
+
+/* Standard service scope details */
+.scope-section{background:#f4fafc}
+.scope-section .section-head p{max-width:780px;margin:15px auto 0}
+.scope-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:40px}
+.scope-card{padding:32px;border:1px solid #d7e8f0;border-radius:24px;background:#fff;box-shadow:0 10px 36px rgba(10,53,88,.03)}
+.scope-card .scope-title{display:flex;align-items:flex-start;gap:12px;justify-content:space-between;margin-bottom:14px}
+.scope-card .scope-title h3{font-size:22px}
+.scope-card .scope-title>span{white-space:nowrap;font-size:10px;color:#056487;background:#e5f7fc;padding:6px 9px;border-radius:999px;font-weight:800}
+.scope-card>p{font-size:14px;margin-bottom:24px}
+.scope-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.scope-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;color:#31536c}
+.scope-check{flex-shrink:0;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#e3f7ef;color:#0e9473;font-size:12px;font-weight:800}
+.scope-extras{background:#e5f5fa;border-radius:22px;border:1px solid #cde8f1;margin-top:26px;padding:30px}
+.scope-extras h3{font-size:24px;margin-bottom:19px}
+.scope-extras .scope-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.scope-extras .scope-check{background:#fff;color:#0b85b6}
+.scope-safety{font-size:13px;line-height:1.7;margin:23px 0}
+#areaGroup[hidden]{display:none!important}
+.estimate .choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.estimate .result-btn:disabled{opacity:.6;cursor:not-allowed}
+@media(max-width:800px){.scope-grid{grid-template-columns:1fr}}
+@media(max-width:590px){.scope-extras .scope-list{grid-template-columns:1fr}.scope-card{padding:24px}.scope-extras{padding:23px}.scope-card .scope-title{flex-direction:column}.scope-card .scope-title h3{font-size:21px}}
