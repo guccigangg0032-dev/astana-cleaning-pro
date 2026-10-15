@@ -62,7 +62,7 @@ const descr=document.querySelector('main p')?.textContent||t.footer;
 document.querySelector('meta[name="description"]')?.setAttribute('content',descr);
 document.querySelector('meta[property="og:title"]')?.setAttribute('content',document.title);
 document.querySelector('meta[property="og:description"]')?.setAttribute('content',descr);
-const canonical=document.createElement('link');canonical.rel='canonical';canonical.href=new URL(pages[current],location.href).href;document.head.appendChild(canonical);
+const canonical=document.createElement('link');canonical.rel='canonical';canonical.href=new URL(pages[current]+(lang==='ru'?'':'?lang='+lang),location.href).href;document.head.appendChild(canonical);
 for(const code of known){const alt=document.createElement('link');alt.rel='alternate';alt.hreflang=code;alt.href=new URL(pages[current]+(code==='ru'?'':'?lang='+code),location.href).href;document.head.appendChild(alt)}
 window.ACPro={lang,t,prices:priceItems,money,wapp};
 })();
