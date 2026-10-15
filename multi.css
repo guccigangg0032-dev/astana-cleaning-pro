@@ -150,3 +150,21 @@
 .estimate .result-btn:disabled{opacity:.6;cursor:not-allowed}
 @media(max-width:800px){.scope-grid{grid-template-columns:1fr}}
 @media(max-width:590px){.scope-extras .scope-list{grid-template-columns:1fr}.scope-card{padding:24px}.scope-extras{padding:23px}.scope-card .scope-title{flex-direction:column}.scope-card .scope-title h3{font-size:21px}}
+
+/* Clear package inclusions and standalone quote UX */
+.service-scope-link{display:inline-block;color:#087dd8;font-weight:800;font-size:12px;margin-top:-8px;margin-bottom:19px;align-self:flex-start;text-decoration:underline;text-decoration-color:#b5ddec;text-underline-offset:4px}
+.service-scope-link:hover{color:#065a9a}
+.scope-card{scroll-margin-top:115px}
+.scope-price-link{text-align:center;margin:23px auto 0;font-size:14px;font-weight:800;color:#087dd8}
+.scope-price-link a:hover{text-decoration:underline}
+.estimate #priceResult{overflow-wrap:anywhere;line-height:1.14;max-width:100%}
+.estimate #priceDetails{overflow-wrap:anywhere}
+.estimate #sendEstimate:disabled{cursor:not-allowed;opacity:.56;transform:none}
+.estimate #extraNotice{font-size:12px;line-height:1.6;margin-bottom:12px}
+.estimate .choice-grid .choice span{min-height:92px}
+.estimate .choice-grid .choice input:focus-visible+span{outline:2px solid #087dd8;outline-offset:2px}
+@media(max-width:460px){
+ .estimate .choice-grid .choice span{padding:10px 7px;min-height:84px}
+ .estimate #priceResult{font-size:clamp(26px,8vw,39px);letter-spacing:-.035em}
+ .service-scope-link{margin-top:-5px}
+}
