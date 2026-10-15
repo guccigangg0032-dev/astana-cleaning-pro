@@ -33,7 +33,6 @@
 .feature-card p{font-size:14px}
 .feature-icon{font-size:23px;font-weight:800;color:#0c91ca}
 .home-why{background:#f7fbfd}
-.step-number{color:#0d8bd0;font-weight:800;font-size:13px;display:block;margin-bottom:18px}
 .steps-grid{margin-top:32px}
 .equipment-grid{margin-top:32px}
 .standalone-faq{max-width:890px;margin:0 auto}
@@ -99,7 +98,6 @@
 .career-roles{padding-top:70px;padding-bottom:80px}
 .career-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:38px}
 .career-card{border:1px solid #d7e9f3;background:#f5fbfd;border-radius:22px;padding:30px 26px;display:flex;flex-direction:column;min-height:325px}
-.career-number{font-size:14px;font-weight:800;color:#0c8fc8;margin-bottom:22px}
 .career-card h3{font-size:21px;margin-bottom:14px}
 .career-card p{font-size:14px;margin:0 0 16px}
 .career-card .career-requirement{color:#36576b}
@@ -171,11 +169,6 @@
 
 
 /* Induction cooktop size calculator */
-.hob-size-box{border:1px solid #b9e0f1;background:#eff9fd;border-radius:14px;padding:18px;margin-top:15px}
-.hob-size-box[hidden]{display:none!important}
-.hob-size-box label{display:block;font-size:13px;font-weight:800;margin-bottom:10px;color:#174661}
-.hob-size-box select{display:block;width:100%;border-radius:10px;border:1px solid #acd6e8;padding:12px 13px;background:#fff;color:#154766;font:inherit;font-weight:700}
-.hob-size-box p{font-size:12px;color:#5b7487;line-height:1.65;margin-top:11px}
 
 /* First-screen live quote: deliberately prioritized over decoration */
 .hero-calc{padding:58px 0 82px}
@@ -231,3 +224,31 @@
 .hero-calc-head h2{font-size:25px}
 .quick-result strong{font-size:36px}
 }
+
+/* Human-written structure: headings and real content, no automatic card numbering. */
+.steps-grid .step{padding-top:28px;border-top:2px solid #b5dfea}
+.steps-grid .step h3{margin-top:0;font-weight:800;letter-spacing:-.012em}
+.career-grid .career-card{background:#fff;min-height:0;border:1px solid #d6e8f1;padding:29px 27px;border-radius:17px}
+.career-grid .career-card h3{margin-top:0;letter-spacing:-.025em}
+.career-grid .career-card:nth-child(even){background:#f7fbfd}
+.feature-grid .feature-card{border-radius:16px;min-height:0}
+.feature-grid .feature-card h3{margin-top:0}
+.separate-hob-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;margin-top:34px;padding:28px 31px;background:#f0f8fb;border:1px solid #c8e4f0;border-radius:18px}
+.separate-hob-card h2{margin:10px 0 9px;font-size:clamp(20px,2vw,27px);line-height:1.2}
+.separate-hob-card p{font-size:13px;line-height:1.7;max-width:780px;color:#466c81}
+.separate-hob-card .btn{white-space:normal;text-align:center;max-width:260px}
+.hob-size-choices{border:0;padding:0;margin:0;min-width:0}
+.hob-size-choices legend{font-size:13px;font-weight:800;margin-bottom:14px;color:#174661}
+.hob-choice-grid{display:grid;gap:11px}
+.hob-choice{display:grid;grid-template-columns:19px minmax(0,1fr) auto;gap:13px;align-items:center;cursor:pointer;border:1px solid #d2e5ef;border-radius:14px;background:#fff;padding:16px 15px;min-height:65px;transition:border-color .2s,background .2s}
+.application-form .hob-choice input[type=radio]{width:19px;height:19px;min-height:0;margin:0;padding:0;accent-color:#0b83ce;cursor:pointer}
+.hob-choice:has(input:checked){background:#ecf8fe;border-color:#0a88cc;box-shadow:0 0 0 1px rgba(10,136,204,.22)}
+.hob-choice:focus-within{outline:2px solid #178ccc;outline-offset:2px}
+.hob-choice-name{font-size:13px;line-height:1.45;color:#214d67;font-weight:700}
+.hob-choice strong{white-space:nowrap;font-weight:800;color:#0b5a8d;font-size:15px}
+.application-form .hob-inline-price{margin:12px 0 18px;padding:20px 22px}
+.hob-inline-price>span{display:block;color:#386982;font-size:12px;font-weight:700;margin-bottom:8px}
+.hob-inline-price strong{font-size:clamp(25px,3vw,37px);letter-spacing:-.035em;line-height:1.25}
+.hob-inline-price p{font-size:12px;margin-top:8px}
+@media(max-width:800px){.separate-hob-card{grid-template-columns:1fr;padding:23px 20px;gap:18px}.separate-hob-card .btn{max-width:unset;width:100%}}
+@media(max-width:420px){.hob-choice{grid-template-columns:19px minmax(0,1fr);gap:8px}.hob-choice strong{grid-column:2;white-space:normal;font-size:14px}.application-form .hob-inline-price{padding:20px 17px}}
