@@ -13,9 +13,16 @@ const tariffConfig={
 const extraIds=app.prices.map(x=>x.id);
 const rates=app.prices.map(x=>x.sum);
 const params=new URLSearchParams(window.location.search);
-if(params.get('service')==='extras'){
- const option=document.querySelector('input[name="service"][value="extras"]');
+const requested=params.get('service');
+if(['maintenance','general','renovation','extras'].includes(requested)){
+ const option=document.querySelector('input[name="service"][value="'+requested+'"]');
  if(option)option.checked=true;
+}
+const prefill=Number.parseInt(params.get('area'),10);
+if(Number.isFinite(prefill)){
+ const floorArea=Math.max(20,Math.min(2000,prefill));
+ byId('area').value=String(floorArea);
+ byId('areaRange').value=String(Math.min(250,floorArea));
 }
 
 function calculate(){
