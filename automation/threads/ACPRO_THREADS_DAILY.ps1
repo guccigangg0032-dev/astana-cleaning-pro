@@ -13,8 +13,8 @@ if (Test-Path $posted) {
 }
 $posts=Get-Content -Raw -Encoding UTF8 (Join-Path $PSScriptRoot 'threads_posts.json') | ConvertFrom-Json
 $start=([DateTime]::UtcNow.AddHours(5)).Date
-$idx=[int]((([DateTime]::ParseExact($today,'yyyy-MM-dd',[Globalization.CultureInfo]::InvariantCulture)-[DateTime]'2026-10-17').TotalDays) % $posts.Count)
-if ($idx -lt 0) {$idx=0}
+$idx=[int](([DateTime]::ParseExact($today,'yyyy-MM-dd',[Globalization.CultureInfo]::InvariantCulture)-[DateTime]'2026-10-17').TotalDays)
+if ($idx -lt 0 -or $idx -ge $posts.Count) {Write-Host 'Threads content queue exhausted or outside planned week; no repeated posts will be sent.';exit 0}
 $text=[string]$posts[$idx]
 $headers=@{Authorization='Bearer '+[string]$cfg.threads_token}
 Write-Host ('ACPro Threads: creating one original post for '+$today)
