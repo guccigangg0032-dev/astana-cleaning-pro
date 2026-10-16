@@ -2,9 +2,7 @@
 // No forms are submitted, no network is used, no output files are written.
 import fs from 'node:fs';
 import path from 'node:path';
-import {createRequire} from 'node:module';
-const require=createRequire(new URL('../../seo-build/package.json',import.meta.url));
-const {JSDOM}=require('jsdom');
+import {JSDOM} from 'jsdom';
 const root=path.resolve(import.meta.dirname,'..');
 const ORIGIN='https://acpro.kz',LANGS=['ru','kk','en'];
 const PRIMARY='77776146664',SPECIAL='77760001966';
@@ -15,7 +13,7 @@ const normalized=s=>String(s??'').replace(/\s+/g,' ').trim();
 const read=relative=>fs.readFileSync(path.join(root,relative),'utf8');
 function allHtml(folder=root){return fs.readdirSync(folder,{withFileTypes:true}).flatMap(e=>{
   if(e.isDirectory())return ['.git','node_modules','tools'].includes(e.name)?[]:allHtml(path.join(folder,e.name));
-  return e.isFile()&&e.name.endsWith('.html')&&!/^google[a-f0-9]+[.]html$/.test(e.name)?[path.relative(root,path.join(folder,e.name)).replaceAll(path.sep,'/')]:[];
+  return e.isFile()&&e.name.endsWith('.html')&&!/^(?:google[a-f0-9]+|yandex_[a-f0-9]+)[.]html$/i.test(e.name)?[path.relative(root,path.join(folder,e.name)).replaceAll(path.sep,'/')]:[];
 });}
 function diskPath(url){
   if(url.origin!==ORIGIN)return null;
