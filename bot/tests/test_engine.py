@@ -1,10 +1,9 @@
 import importlib.util, pathlib, tempfile, unittest
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from datetime import datetime, timedelta, timezone
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('acpro_engine',ROOT/'engine.py')
 engine=importlib.util.module_from_spec(spec);spec.loader.exec_module(engine)
-DT=lambda hour:datetime(2026,10,17,hour,30,tzinfo=ZoneInfo('Asia/Almaty'))
+DT=lambda hour:datetime(2026,10,17,hour,30,tzinfo=timezone(timedelta(hours=5)))
 
 class SafetyTests(unittest.TestCase):
     def reply(self,text,**kwargs):
