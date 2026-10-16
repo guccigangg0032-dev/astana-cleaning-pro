@@ -136,6 +136,38 @@ def safe_reply(event: dict, rows: list[dict] | None = None, when: datetime | Non
         elif any(matches(n,k) for k in lookup[AI_ID]['ключи_ru'].split(';')+lookup[AI_ID]['ключи_kk'].split(';')+lookup[AI_ID]['ключи_lat_en'].split(';')):
             selected = [lookup[AI_ID]]
         else:
+            # Deterministic quotes: both ordinary rule bot and future Qwen use
+            # the same verified calculator; the language model never does math.
+            from quote import from_text, calculate
+            request = from_text(text)
+            if request is not None:
+                q = calculate(request, lang=lang)
+                res['rule_ids'] = ['quote']
+                res['quote'] = {'kind':q['kind'],'amount_from':q['amount_from'],'preliminary':True}
+                if channel in PUBLIC_CHANNELS and q['kind']=='estimate' and q['amount_from'] is not None:
+                    formatted = f"{q['amount_from']:,}".replace(',',' ')
+                    if lang=='ru':
+                        msg = f"Ориентир от {formatted} ₸, не окончательная стоимость. Точную цену согласует человек по WhatsApp {q['phone']}. Если есть дополнительные работы, их оцениваем отдельно."
+                    elif lang=='kk':
+                        msg = f"Алдын ала {formatted} ₸-ден, бұл соңғы баға емес. Нақты құнын маман WhatsApp-та келіседі: {q['phone']}."
+                    else:
+                        msg = f"Preliminary estimate from {formatted} KZT, not a final quote. A person confirms the price on WhatsApp: {q['phone']}."
+                elif channel in PUBLIC_CHANNELS and q['kind']!='estimate':
+                    if lang=='ru':
+                        msg = f"Для точного предварительного расчёта уточните детали в WhatsApp: {q['phone']}. Итоговую стоимость подтверждает человек."
+                    elif lang=='kk':
+                        msg = f"Алдын ала есептеу үшін WhatsApp арқылы нақтылаңыз: {q['phone']}. Соңғы бағаны маман растайды."
+                    else:
+                        msg = f"Please clarify details via WhatsApp: {q['phone']}. A person confirms final pricing."
+                else:
+                    msg = q['message']
+                if when.hour >= 20:
+                    note = lookup[AFTER_HOURS].get('ответ_'+lang) or lookup[AFTER_HOURS]['ответ_ru']
+                    if note and note not in msg:
+                        msg += '\n\n'+note
+                    res['rule_ids'].append(AFTER_HOURS)
+                res['message'] = msg
+                return res
             selected = best_matches(text,rows)
             if not selected:
                 polite = [r for r in rows if r['тип']=='вежливость' and any(matches(n,k.strip()) for field in ('ключи_ru','ключи_kk','ключи_lat_en') for k in r.get(field,'').split(';') if k.strip())]
