@@ -138,7 +138,10 @@ def safe_reply(event: dict, rows: list[dict] | None = None, when: datetime | Non
         else:
             # Deterministic quotes: both ordinary rule bot and future Qwen use
             # the same verified calculator; the language model never does math.
-            from quote import from_text, calculate
+            try:
+                from quote import from_text, calculate
+            except ModuleNotFoundError:
+                from bot.quote import from_text, calculate
             request = from_text(text)
             if request is not None:
                 q = calculate(request, lang=lang)
