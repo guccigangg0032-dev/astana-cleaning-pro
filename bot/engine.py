@@ -15,10 +15,10 @@ from pathlib import Path
 import re
 import sqlite3
 from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
+from datetime import timezone
 import unicodedata
 
-TZ = ZoneInfo('Asia/Almaty')  # Current Astana local time, UTC+05:00.
+TZ = timezone(timedelta(hours=5), name='Astana')  # Kazakhstan standard time is UTC+05:00; works on Windows without tzdata.
 DATA = Path(__file__).with_name('answers.csv')
 PUBLIC_CHANNELS = {'instagram_comment', 'threads_reply'}
 SUPPORTED_CHANNELS = PUBLIC_CHANNELS | {'instagram_dm', 'website', 'other'}
