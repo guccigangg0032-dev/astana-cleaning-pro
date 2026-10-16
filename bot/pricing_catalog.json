@@ -1,0 +1,33 @@
+{
+  "currency": "KZT",
+  "source": ["script.js", "site.js"],
+  "source_revision_note": "Mirrors live ACPro calculator as at 2026-10-17. CI parity tests must catch price drift.",
+  "area_min": 20,
+  "area_max": 2000,
+  "cleaning": {
+    "maintenance": {"rate": 400, "minimum": 18000},
+    "general": {"rate": 900, "minimum": 38000},
+    "renovation": {"rate": 1200, "minimum": 52000}
+  },
+  "extras": {
+    "sofa": {"price": 10000, "label_ru": "Химчистка двухместного дивана", "label_kk": "Екі орындық диванды химиялық тазалау", "label_en": "Two-seat sofa cleaning"},
+    "chair": {"price": 5500, "label_ru": "Химчистка кресла", "label_kk": "Креслоны химиялық тазалау", "label_en": "Armchair cleaning"},
+    "windows": {"price": 3000, "label_ru": "Мытьё окон", "label_kk": "Терезе жуу", "label_en": "Window cleaning"},
+    "appliances": {"price": 3000, "label_ru": "Чистка бытовой техники", "label_kk": "Тұрмыстық техниканы тазалау", "label_en": "Appliance cleaning"},
+    "dining_chairs": {"price": null, "label_ru": "Химчистка стульев", "label_kk": "Орындықтарды химиялық тазалау", "label_en": "Dining chair cleaning"},
+    "fire": {"price": null, "label_ru": "Уборка после пожара", "label_kk": "Өрттен кейінгі тазалау", "label_en": "Post-fire cleaning"},
+    "bio": {"price": null, "label_ru": "Специализированная уборка после смерти", "label_kk": "Қайтыс болғаннан кейінгі арнайы тазалау", "label_en": "Specialized post-death cleaning"},
+    "curtain_wash": {"price": null, "label_ru": "Стирка штор", "label_kk": "Перделерді жуу", "label_en": "Curtain washing"},
+    "curtain_iron": {"price": null, "label_ru": "Глажка штор", "label_kk": "Перделерді үтіктеу", "label_en": "Curtain ironing"},
+    "curtain_hang": {"price": null, "label_ru": "Снятие и навешивание штор", "label_kk": "Перделерді шешу және ілу", "label_en": "Curtain take-down and rehanging"}
+  },
+  "induction": {
+    "tiers": [
+      {"max_width_cm": 35, "price": 15000},
+      {"max_width_cm": 65, "price": 20000},
+      {"max_width_cm": null, "price": 25000}
+    ],
+    "availability": "Partner/service availability unconfirmed; not all hob models are suitable."
+  },
+  "phones": {"cleaning": "77776146664", "specialist": "77760001966"}
+}
