@@ -63,6 +63,6 @@ byId('areaRange').addEventListener('input',e=>{byId('area').value=e.target.value
 byId('area').addEventListener('input',e=>{const n=Number(e.target.value);if(Number.isFinite(n))byId('areaRange').value=String(Math.max(20,Math.min(250,n)));update()});
 byId('area').addEventListener('blur',e=>{e.target.value=String(calculate().area);update()});
 form.addEventListener('change',update);
-byId('sendEstimate').addEventListener('click',()=>{const url=makeWhatsAppLink();if(url)window.open(url,'_blank','noopener,noreferrer')});
+byId('sendEstimate').addEventListener('click',()=>{const url=makeWhatsAppLink();if(url){window.dispatchEvent(new CustomEvent('acpro:metric',{detail:{event:'quote_handoff',calculator:'main'}}));window.open(url,'_blank','noopener,noreferrer')}});
 update();
 })();

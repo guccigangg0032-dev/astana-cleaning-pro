@@ -1,0 +1,765 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    "https://acpro.kz/",
+    "https://acpro.kz/services.html",
+    "https://acpro.kz/prices.html"
+  ],
+  "editorialNotes": [
+    "Цифровые тарифы не дублируются: используйте единый действующий прайс проекта.",
+    "Нет обещаний свободного времени, полного удаления загрязнений, высотных работ или неподтверждённых гарантий.",
+    "Окна, химчистка мебели и внутренняя чистка техники не объявляются включёнными в базовую уборку."
+  ],
+  "pages": [
+    {
+      "slug": "uborka-kvartir-astana",
+      "related": [
+        "generalnaya-uborka-astana",
+        "uborka-posle-remonta-astana",
+        "himchistka-mebeli-astana"
+      ],
+      "ru": {
+        "title": "Уборка квартир в Астане | Astana Cleaning Pro",
+        "description": "Поддерживающая, генеральная уборка и уборка квартиры после ремонта в Астане. Сравните состав работ и получите предварительный расчёт по площади и фото.",
+        "h1": "Уборка квартир в Астане",
+        "intro": "Формат уборки зависит от состояния квартиры и вашей задачи. Для регулярного порядка подойдёт поддерживающая уборка, для более тщательной очистки — генеральная, после ремонтных работ нужен отдельный состав работ.",
+        "sections": [
+          {
+            "heading": "Как выбрать подходящий вид уборки",
+            "items": [
+              "Поддерживающая: влажная протирка доступных поверхностей, полы, наружные поверхности кухни и санузел без глубокого отмывания сложных загрязнений.",
+              "Генеральная: тщательная очистка доступных и совместимых с обработкой поверхностей; внутренние части шкафов очищаются, если они освобождены.",
+              "После ремонта: работа со строительной пылью и следами ремонта после оценки материалов и состояния квартиры."
+            ]
+          },
+          {
+            "heading": "Что указать для расчёта",
+            "text": "Сообщите площадь квартиры, район Астаны, выбранный формат и основные загрязнения. Фотографии кухни, санузла и сложных участков помогут уточнить объём. Если требуется уборка только части квартиры, заранее перечислите комнаты и зоны. Итоговую стоимость и состав работ согласуем до начала уборки."
+          },
+          {
+            "heading": "Дополнительные услуги и подготовка",
+            "text": "Мытьё окон, химчистка мебели, внутренняя чистка духовки и микроволновки, стирка и глажка штор согласуются отдельно. Перед очисткой внутри шкафов освободите их от вещей или обсудите помощь. Для стен, потолков и светильников важны материал покрытия и безопасный доступ."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Как узнать стоимость уборки квартиры?",
+            "a": "Выберите вид уборки и площадь на странице цен. Калькулятор показывает предварительный ориентир; окончательная сумма зависит от состояния квартиры, доступа и согласованных дополнительных работ."
+          },
+          {
+            "q": "Входят ли окна и химчистка дивана?",
+            "a": "Эти услуги оплачиваются отдельно. Укажите их при обращении, чтобы расчёт учитывал нужный состав работ."
+          },
+          {
+            "q": "Можно ли выбрать удобную дату?",
+            "a": "Укажите желаемую дату в обращении. Возможность выезда и время подтверждаются при согласовании заказа; заполнение калькулятора не бронирует время."
+          }
+        ]
+      },
+      "kk": {
+        "title": "Астанада пәтер тазалау | Astana Cleaning Pro",
+        "description": "Астанада күнделікті тәртіпті сақтау, күрделі тазалау және жөндеуден кейінгі пәтер тазалау. Жұмыс көлемін салыстырып, алдын ала есеп алыңыз.",
+        "h1": "Астанада пәтер тазалау",
+        "intro": "Тазалау түрі пәтердің жағдайы мен сіздің мақсатыңызға байланысты. Тәртіпті сақтау үшін тұрақты тазалау, толық күтім үшін күрделі тазалау, ал жөндеуден кейін арнайы жұмыс көлемі таңдалады.",
+        "sections": [
+          {
+            "heading": "Қай тазалау түрін таңдау керек",
+            "items": [
+              "Тұрақты тазалау: қол жететін беттерді ылғал сүрту, еден, асүйдің сыртқы беттері және жуынатын бөлме. Күрделі кірді терең кетіру кірмейді.",
+              "Күрделі тазалау: өңдеуге жарамды қол жететін беттерді мұқият тазалау. Шкафтардың іші заттардан босатылған жағдайда тазаланады.",
+              "Жөндеуден кейін: материал мен пәтер жағдайын бағалаған соң құрылыс шаңы мен жөндеу іздерін тазалау."
+            ]
+          },
+          {
+            "heading": "Есеп үшін қандай ақпарат қажет",
+            "text": "Пәтер аумағын, Астанадағы ауданын, тазалау түрін және негізгі кірді жазыңыз. Асүйдің, жуынатын бөлменің және күрделі жерлердің фотосын жіберуге болады. Пәтердің бір бөлігін ғана тазалау керек болса, бөлмелерді алдын ала атаңыз. Соңғы баға мен жұмыс көлемі басталғанға дейін келісіледі."
+          },
+          {
+            "heading": "Қосымша қызметтер және дайындық",
+            "text": "Терезе жуу, жиһазды химиялық тазалау, пеш пен микротолқынды пештің ішін тазалау, перделерді жуу және үтіктеу бөлек келісіледі. Шкаф ішін тазалау үшін заттарды алып қойыңыз немесе көмекті талқылаңыз. Қабырға, төбе және шамдарды өңдеу материал мен қауіпсіз қолжетімділікке байланысты."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Пәтер тазалау бағасын қалай білемін?",
+            "a": "Бағалар бетіндегі калькулятордан тазалау түрі мен аумақты таңдаңыз. Бұл алдын ала есеп; соңғы сома пәтер жағдайына және келісілген қосымша жұмыстарға байланысты."
+          },
+          {
+            "q": "Терезелер мен диванды тазалау кіре ме?",
+            "a": "Олар бөлек төленеді. Есепке қосу үшін өтініште көрсетіңіз."
+          },
+          {
+            "q": "Қолайлы күнді таңдауға бола ма?",
+            "a": "Қалаған күніңізді жазыңыз. Бару мүмкіндігі мен уақыт тапсырысты келісу кезінде расталады. Калькулятор уақытты брондамайды."
+          }
+        ]
+      },
+      "en": {
+        "title": "Apartment Cleaning in Astana | Astana Cleaning Pro",
+        "description": "Maintenance, deep and post-renovation apartment cleaning in Astana. Compare the scope of work and request an estimate using your floor area and photos.",
+        "h1": "Apartment cleaning in Astana",
+        "intro": "Choose a cleaning format to match your apartment and the task. Maintenance cleaning helps keep everyday order, deep cleaning covers more thorough work, and a recently renovated apartment needs a separately agreed scope.",
+        "sections": [
+          {
+            "heading": "Choose the right cleaning format",
+            "items": [
+              "Maintenance cleaning: wiping accessible surfaces, cleaning floors, kitchen exteriors and the bathroom without intensive removal of difficult deposits.",
+              "Deep cleaning: thorough care for accessible surfaces that can be safely cleaned, including cabinet interiors when emptied.",
+              "Post-renovation cleaning: construction dust and renovation residue, subject to assessment of materials and the apartment's condition."
+            ]
+          },
+          {
+            "heading": "Information for your estimate",
+            "text": "Share the floor area, district in Astana, cleaning format and main concerns. Photos of the kitchen, bathroom and difficult areas help clarify the work. If only part of the apartment needs cleaning, list those rooms. The final price and scope are agreed before work starts."
+          },
+          {
+            "heading": "Extras and preparation",
+            "text": "Window washing, upholstery cleaning, cleaning inside ovens and microwaves, and curtain washing or ironing are agreed separately. Empty cabinets before interior cleaning or discuss assistance. Walls, ceilings and light fittings are assessed for material compatibility and safe access."
+          }
+        ],
+        "faq": [
+          {
+            "q": "How can I estimate the cost?",
+            "a": "Select the cleaning type and floor area on the prices page. The calculator gives an initial estimate; the final amount depends on condition, access and agreed extras."
+          },
+          {
+            "q": "Are windows and sofa cleaning included?",
+            "a": "These are separately priced services. Include them in your enquiry so the estimate reflects the work you need."
+          },
+          {
+            "q": "Can I request a preferred date?",
+            "a": "Yes. Tell us your preferred date when enquiring. Availability and timing must be confirmed; using the calculator does not reserve a time slot."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "generalnaya-uborka-astana",
+      "related": [
+        "uborka-kvartir-astana",
+        "moika-okon-astana",
+        "himchistka-mebeli-astana"
+      ],
+      "ru": {
+        "title": "Генеральная уборка в Астане | Astana Cleaning Pro",
+        "description": "Генеральная уборка в Астане: кухня, санузел, полы, доступные поверхности и освобождённые шкафы. Состав работ и итоговую стоимость согласуем заранее.",
+        "h1": "Генеральная уборка в Астане",
+        "intro": "Генеральная уборка подходит, когда регулярного ухода недостаточно и нужно тщательно очистить помещение. Работаем с доступными поверхностями, выбирая способ очистки с учётом материала и состояния.",
+        "sections": [
+          {
+            "heading": "Что входит в генеральную уборку",
+            "items": [
+              "Сухая и влажная очистка доступных поверхностей, полов, плинтусов, дверей, ручек и подоконников.",
+              "Кухонный гарнитур снаружи и внутри, если шкафы освобождены; наружные доступные поверхности электрической или газовой плиты.",
+              "Сантехника, зеркала и доступные поверхности санузла.",
+              "Шкафы и полки внутри после освобождения от вещей.",
+              "Балкон: пол, подоконники и доступные поверхности без мытья окон."
+            ]
+          },
+          {
+            "heading": "Деликатные и труднодоступные поверхности",
+            "text": "Стены, потолки, люстры и светильники очищаем, если покрытие допускает обработку и есть безопасный доступ. Не каждую поверхность можно мыть водой или обрабатывать одним средством. Покажите чувствительные покрытия и стойкие загрязнения на фотографиях до согласования работ."
+          },
+          {
+            "heading": "Какие работы рассчитываются отдельно",
+            "text": "Мытьё окон, химчистка мебели, чистка духовки и микроволновки внутри, стирка и глажка штор не входят автоматически в генеральную уборку. Для штор учитываются ярлык по уходу и ткань; снятие и навешивание обсуждаются отдельно. Начальный расчёт доступен на странице цен, итог зависит от согласованного объёма и состояния объекта."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Нужно ли освобождать шкафы?",
+            "a": "Для очистки внутри шкафы и полки должны быть освобождены от вещей. Если требуется помощь, её нужно заранее согласовать."
+          },
+          {
+            "q": "Можно ли вымыть все стены и потолки?",
+            "a": "Возможность обработки зависит от покрытия и доступа. Влажную очистку любых материалов без оценки не обещаем."
+          },
+          {
+            "q": "Чем генеральная уборка отличается от поддерживающей?",
+            "a": "Поддерживающая уборка сохраняет регулярную чистоту без глубокого отмывания сложных загрязнений. Генеральная предполагает более тщательный состав работ, включая согласованные внутренние поверхности освобождённых шкафов."
+          }
+        ]
+      },
+      "kk": {
+        "title": "Астанада күрделі тазалау | Astana Cleaning Pro",
+        "description": "Астанада күрделі тазалау: асүй, жуынатын бөлме, едендер, қол жететін беттер және бос шкафтар. Жұмыс көлемі мен соңғы баға алдын ала келісіледі.",
+        "h1": "Астанада күрделі тазалау",
+        "intro": "Күрделі тазалау күнделікті күтім жеткіліксіз болғанда үй-жайды мұқият тазалауға арналған. Өңдеу тәсілі беттің материалы мен жағдайына қарай таңдалады.",
+        "sections": [
+          {
+            "heading": "Қандай жұмыстар кіреді",
+            "items": [
+              "Қол жететін беттерді құрғақ және ылғал тазалау: едендер, плинтустар, есіктер, тұтқалар және терезе алды тақталары.",
+              "Асүй жиһазының сырты, босатылған шкафтардың іші, электр немесе газ плитасының сыртқы қол жететін беттері.",
+              "Сантехника, айналар және жуынатын бөлменің қол жететін беттері.",
+              "Заттардан босатылған шкафтар мен сөрелердің іші.",
+              "Балконның едені, терезе алды тақталары және қол жететін беттері. Терезе жуу бөлек есептеледі."
+            ]
+          },
+          {
+            "heading": "Нәзік материалдар және қолжетімділік",
+            "text": "Қабырғалар, төбелер, аспалы шамдар материал өңдеуге жарамды және қауіпсіз қолжетімді болғанда тазаланады. Әр жабындыны сумен жууға болмайды. Сезімтал беттер мен күрделі кірді жұмыс көлемін келіспес бұрын фотода көрсетіңіз."
+          },
+          {
+            "heading": "Бөлек есептелетін жұмыстар",
+            "text": "Терезе жуу, жиһазды химиялық тазалау, пеш пен микротолқынды пештің ішін тазалау, перделерді жуу және үтіктеу автоматты түрде кірмейді. Перде матасы мен күтім белгісі ескеріледі; алу және қайта ілу бөлек талқыланады. Алдын ала есеп бағалар бетінде, соңғы сома объект жағдайы мен келісілген жұмыстарға байланысты."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Шкафтарды босату керек пе?",
+            "a": "Ішін тазалау үшін шкафтар мен сөрелерді заттардан босату қажет. Көмек керек болса, алдын ала келісіңіз."
+          },
+          {
+            "q": "Барлық қабырға мен төбені жууға бола ма?",
+            "a": "Бұл жабын материалы мен қолжетімділікке байланысты. Бағалаусыз кез келген бетті ылғал тазалауға уәде бермейміз."
+          },
+          {
+            "q": "Тұрақты тазалаудан айырмашылығы қандай?",
+            "a": "Тұрақты тазалау күнделікті тазалықты сақтайды. Күрделі тазалау тереңірек жұмыс көлемін, соның ішінде келісілген бос шкафтардың ішін тазалауды қамтиды."
+          }
+        ]
+      },
+      "en": {
+        "title": "Deep Cleaning in Astana | Astana Cleaning Pro",
+        "description": "Deep cleaning in Astana for kitchens, bathrooms, floors and accessible surfaces, including emptied cabinets. Agree the scope and final price before work.",
+        "h1": "Deep cleaning in Astana",
+        "intro": "Deep cleaning suits a property that needs more thorough care than regular maintenance. Cleaning methods are selected for the material, condition and safe accessibility of each surface.",
+        "sections": [
+          {
+            "heading": "What the service covers",
+            "items": [
+              "Dry and damp cleaning of accessible surfaces, floors, skirting boards, doors, handles and window sills.",
+              "Kitchen cabinet exteriors and emptied interiors; accessible outer surfaces of electric or gas cookers.",
+              "Sanitary fittings, mirrors and accessible bathroom surfaces.",
+              "The insides of cabinets and shelves after belongings have been removed.",
+              "Balcony floors, sills and accessible surfaces; window washing is separate."
+            ]
+          },
+          {
+            "heading": "Delicate surfaces and safe access",
+            "text": "Walls, ceilings and light fittings are cleaned only when the finish permits it and access is safe. Water and cleaning products are not suitable for every finish. Share photos of delicate materials and difficult marks before agreeing the scope."
+          },
+          {
+            "heading": "Separately agreed work",
+            "text": "Window washing, upholstery cleaning, oven and microwave interiors, and curtain washing or ironing are not automatically included. Curtain care depends on the fabric and care label; taking curtains down and rehanging them is agreed separately. The prices page gives an initial estimate, with the final scope and price agreed for the property's condition."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Should I empty cabinets?",
+            "a": "Cabinets and shelves must be emptied for interior cleaning. Discuss any help you need before the visit."
+          },
+          {
+            "q": "Can all walls and ceilings be washed?",
+            "a": "That depends on the finish and access. We do not promise wet cleaning of every material without assessment."
+          },
+          {
+            "q": "How does deep cleaning differ from maintenance cleaning?",
+            "a": "Maintenance cleaning keeps everyday cleanliness without intensive removal of difficult deposits. Deep cleaning has a more thorough scope, including agreed interiors of emptied cabinets."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "uborka-posle-remonta-astana",
+      "related": [
+        "uborka-kvartir-astana",
+        "generalnaya-uborka-astana",
+        "moika-okon-astana"
+      ],
+      "ru": {
+        "title": "Уборка после ремонта в Астане | Astana Cleaning Pro",
+        "description": "Уборка после ремонта в Астане: строительная пыль и следы работ на подходящих поверхностях. Оценка по площади, фото и материалам, расчёт до начала уборки.",
+        "h1": "Уборка после ремонта в Астане",
+        "intro": "После ремонта на поверхностях остаются строительная пыль и следы отделочных работ. Состав такой уборки согласуется отдельно: учитываем материалы, состояние помещения и возможность безопасной очистки.",
+        "sections": [
+          {
+            "heading": "Что важно показать перед расчётом",
+            "items": [
+              "Общую площадь и комнаты, в которых закончены ремонтные работы.",
+              "Фотографии пыли и следов ремонта на полу, дверях, подоконниках и других поверхностях.",
+              "Материалы покрытий и сведения о недавно нанесённой отделке, если они известны.",
+              "Наличие мебели, оставшихся материалов и ограничения доступа к объекту."
+            ]
+          },
+          {
+            "heading": "Как согласуется состав работ",
+            "text": "Основная задача — убрать строительную пыль и доступные следы ремонта с подходящих поверхностей. Сложные загрязнения и чувствительные покрытия оцениваются до выбора метода очистки. Мытьё окон укажите отдельно: количество окон и доступ влияют на расчёт. Если остались крупный мусор или стройматериалы, заранее обсудите, какие подготовительные работы нужны; их вывоз не считается автоматически включённым."
+          },
+          {
+            "heading": "Предварительная цена и готовность объекта",
+            "text": "Выберите уборку после ремонта и площадь на странице цен. Это предварительный ориентир, а не обещание одинаковой стоимости для любого состояния. До начала работ уточним объём, дополнительные услуги и итоговую сумму. Сообщите о продолжающихся ремонтных работах: они могут влиять на подготовку помещения и согласование даты."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Удаляются ли любые следы ремонта?",
+            "a": "Возможность очистки зависит от материала и характера загрязнения. Полное удаление любых следов без оценки поверхности не обещаем."
+          },
+          {
+            "q": "Включено ли мытьё окон?",
+            "a": "Мытьё окон — отдельная услуга. Укажите количество, тип остекления и условия доступа при обращении."
+          },
+          {
+            "q": "Можно ли заказать уборку сразу после завершения ремонта?",
+            "a": "Напишите, какие работы закончены и какие материалы использованы. Готовность покрытий к очистке, доступ и дату согласуем до выезда; универсальный срок высыхания не назначаем."
+          }
+        ]
+      },
+      "kk": {
+        "title": "Астанада жөндеуден кейін тазалау | Astana Cleaning Pro",
+        "description": "Астанада жөндеуден кейінгі құрылыс шаңы мен жөндеу іздерін тазалау. Аумақ, фотосуреттер және материалдар бойынша бағалап, жұмысты алдын ала келісеміз.",
+        "h1": "Астанада жөндеуден кейін тазалау",
+        "intro": "Жөндеуден кейін беттерде құрылыс шаңы мен әрлеу жұмыстарының іздері қалады. Материал, үй-жай жағдайы және қауіпсіз тазалау мүмкіндігі ескеріліп, жұмыс көлемі бөлек келісіледі.",
+        "sections": [
+          {
+            "heading": "Есеп үшін нені көрсету қажет",
+            "items": [
+              "Жалпы аумақты және жөндеуі аяқталған бөлмелерді.",
+              "Еден, есік, терезе алды және басқа беттердегі шаң мен жөндеу іздерінің фотосын.",
+              "Белгілі болса, жабын материалдарын және жаңа әрлеу туралы ақпаратты.",
+              "Жиһаздың, қалған материалдардың бар-жоғын және кіру шектеулерін."
+            ]
+          },
+          {
+            "heading": "Жұмыс көлемін қалай келісеміз",
+            "text": "Негізгі мақсат — жарамды беттерден құрылыс шаңы мен қол жететін жөндеу іздерін тазалау. Күрделі кір мен сезімтал жабындар өңдеу тәсілін таңдаудан бұрын бағаланады. Терезе жууды бөлек көрсетіңіз: саны мен қолжетімділігі есепке әсер етеді. Ірі қоқыс пен құрылыс материалдары қалса, дайындықты алдын ала талқылаңыз; оларды әкету автоматты түрде кірмейді."
+          },
+          {
+            "heading": "Алдын ала баға және объектінің дайындығы",
+            "text": "Бағалар бетінде жөндеуден кейінгі тазалауды және аумақты таңдаңыз. Бұл барлық жағдайға бірдей соңғы баға емес. Жұмыс басталғанға дейін көлемін, қосымша қызметтерді және соманы келісеміз. Жалғасып жатқан жөндеу туралы хабарлаңыз: ол дайындық пен күнді таңдауға әсер етуі мүмкін."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Кез келген жөндеу ізі кете ме?",
+            "a": "Тазалау мүмкіндігі материал мен кірдің түріне байланысты. Бағалаусыз барлық ізді толық кетіруге уәде бермейміз."
+          },
+          {
+            "q": "Терезе жуу кіре ме?",
+            "a": "Терезе жуу бөлек қызмет. Санын, әйнектеу түрін және қолжетімділікті өтініште көрсетіңіз."
+          },
+          {
+            "q": "Жөндеу аяқталған бойда тазалауға бола ма?",
+            "a": "Қандай жұмыстар аяқталғанын және қолданылған материалдарды жазыңыз. Жабынның өңдеуге дайындығы мен күнді алдын ала келісеміз; бәріне ортақ кебу мерзімін белгілемейміз."
+          }
+        ]
+      },
+      "en": {
+        "title": "Post-Renovation Cleaning in Astana | Astana Cleaning Pro",
+        "description": "Post-renovation cleaning in Astana for construction dust and residue on suitable surfaces. Request an assessment based on floor area, photos and materials.",
+        "h1": "Post-renovation cleaning in Astana",
+        "intro": "Renovation leaves construction dust and traces of finishing work. This service has a separately agreed scope based on the materials, the property's condition and what can be safely cleaned.",
+        "sections": [
+          {
+            "heading": "What to share for an assessment",
+            "items": [
+              "The total floor area and the rooms where renovation has finished.",
+              "Photos of dust and renovation residue on floors, doors, sills and other surfaces.",
+              "Details of finishes and recently applied materials, where known.",
+              "Whether furniture or leftover materials are present, and any access restrictions."
+            ]
+          },
+          {
+            "heading": "Agreeing the scope",
+            "text": "The focus is removing construction dust and accessible renovation residue from suitable surfaces. Difficult marks and sensitive finishes need assessment before a method is chosen. Request window washing separately: the number of windows and access affect the estimate. Discuss remaining bulky waste or building materials in advance; their removal is not automatically included."
+          },
+          {
+            "heading": "Estimate and site readiness",
+            "text": "Select post-renovation cleaning and the floor area on the prices page for an initial guide. It is not a fixed offer for every condition. The final work, extras and price are agreed before cleaning starts. Let us know if renovation is continuing, as this may affect preparation and scheduling."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Can every renovation mark be removed?",
+            "a": "That depends on the material and the residue. Complete removal of every mark cannot be promised without assessing the surface."
+          },
+          {
+            "q": "Does the service include window washing?",
+            "a": "Window washing is a separate service. Share the number of windows, glazing type and access conditions when enquiring."
+          },
+          {
+            "q": "Can cleaning start immediately after renovation?",
+            "a": "Tell us which works are finished and which materials were used. Finish readiness, access and the date must be agreed; we do not assign one drying time to all materials."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "himchistka-mebeli-astana",
+      "related": [
+        "uborka-kvartir-astana",
+        "generalnaya-uborka-astana",
+        "uborka-ofisov-astana"
+      ],
+      "ru": {
+        "title": "Химчистка мебели в Астане | Astana Cleaning Pro",
+        "description": "Химчистка диванов, кресел, матрасов и тканевых стульев в Астане. Оцениваем обивку и загрязнения по фото, согласуем возможность обработки и стоимость.",
+        "h1": "Химчистка мягкой мебели в Астане",
+        "intro": "Подбираем обработку мягкой мебели после оценки обивки и загрязнений. Для дивана, кресла, матраса или тканевого стула важны материал, размеры, состояние и история ухода.",
+        "sections": [
+          {
+            "heading": "Какие предметы можно обсудить",
+            "items": [
+              "Диваны: количество мест, прямая или угловая форма, общий размер и тип обивки.",
+              "Кресла: размер, материал и загрязнённые участки.",
+              "Матрасы: размеры, состояние поверхности и характер загрязнений.",
+              "Стулья с тканевыми сиденьями и спинками: количество и тип обивки."
+            ]
+          },
+          {
+            "heading": "Как получить предварительную оценку",
+            "text": "Пришлите общий вид предмета и отдельные фотографии пятен. Если есть маркировка по уходу, укажите её; сообщите, чем мебель уже пытались чистить. Эта информация помогает оценить возможность обработки и ограничения. Стоимость зависит от предмета, размеров, ткани и загрязнения; окончательные условия согласуются до работ."
+          },
+          {
+            "heading": "Что нужно знать о результате",
+            "text": "Старые пятна, изменение цвета и повреждение материала не равны обычному загрязнению. Полное удаление пятен или запахов заранее не гарантируется. Возможность обработки деликатной или неизвестной ткани требует оценки. Химчистка мебели не включается автоматически в уборку квартиры: перечислите нужные предметы при заказе."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Можно ли узнать цену только по слову «диван»?",
+            "a": "Для полезного расчёта нужны размер, количество мест, форма, ткань и фотографии состояния. На странице цен есть стартовые ориентиры, итог уточняется после оценки."
+          },
+          {
+            "q": "Все пятна и запахи исчезнут?",
+            "a": "Заранее этого не обещаем. Результат зависит от материала, характера и давности загрязнения, предыдущей обработки и состояния обивки."
+          },
+          {
+            "q": "Когда мебель можно будет использовать?",
+            "a": "Условия после обработки, включая ограничения использования, уточняются для выбранного материала и способа очистки. Одинаковое время высыхания для любой мебели не обещаем."
+          }
+        ]
+      },
+      "kk": {
+        "title": "Астанада жиһазды химиялық тазалау | Astana Cleaning Pro",
+        "description": "Астанада диван, кресло, матрас және матамен қапталған орындықтарды тазалау. Қаптама мен кірді фото бойынша бағалап, өңдеу мүмкіндігі мен бағаны келісеміз.",
+        "h1": "Астанада жұмсақ жиһазды химиялық тазалау",
+        "intro": "Жұмсақ жиһазды өңдеу тәсілі қаптама мен кір бағаланғаннан кейін таңдалады. Диван, кресло, матрас немесе мата орындық үшін материал, өлшем, жағдай және бұрынғы күтім маңызды.",
+        "sections": [
+          {
+            "heading": "Қандай жиһазды талқылауға болады",
+            "items": [
+              "Диван: орын саны, түзу не бұрыштық пішіні, өлшемі және қаптама түрі.",
+              "Кресло: өлшемі, материалы және кірленген бөліктері.",
+              "Матрас: өлшемдері, бетінің жағдайы және кірдің сипаты.",
+              "Матамен қапталған орындықтар: саны, отырғыш пен арқалық қаптамасының түрі."
+            ]
+          },
+          {
+            "heading": "Алдын ала бағалау үшін",
+            "text": "Жиһаздың жалпы көрінісін және дақтардың жеке фотосын жіберіңіз. Күтім белгісі болса, көрсетіңіз; бұған дейін қандай құралмен тазаланғанын айтыңыз. Бұл өңдеу мүмкіндігі мен шектеулерді бағалауға көмектеседі. Соңғы баға затқа, өлшемге, матаға және кірге қарай жұмысқа дейін келісіледі."
+          },
+          {
+            "heading": "Нәтижеге қатысты шектеулер",
+            "text": "Ескі дақ, түс өзгеруі және материал зақымы қарапайым кірмен бірдей емес. Дақтар мен иістердің толық кетуіне алдын ала кепілдік берілмейді. Нәзік немесе белгісіз матаны өңдеу мүмкіндігі бағалауды қажет етеді. Жиһазды тазалау пәтер тазалауға автоматты түрде кірмейді: қажетті заттарды бөлек атаңыз."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Тек «диван» деп баға білуге бола ма?",
+            "a": "Дұрыс есеп үшін өлшем, орын саны, пішін, мата және жағдайының фотосы қажет. Бағалар бетінде бастапқы бағдар бар, соңғы сома бағалаудан кейін нақтыланады."
+          },
+          {
+            "q": "Барлық дақ пен иіс кете ме?",
+            "a": "Алдын ала уәде бермейміз. Нәтиже материалға, кірдің сипаты мен ескілігіне, бұрынғы өңдеуге және қаптама жағдайына байланысты."
+          },
+          {
+            "q": "Жиһазды қашан пайдалануға болады?",
+            "a": "Өңдеуден кейінгі пайдалану шарттары материал мен тазалау тәсіліне қарай нақтыланады. Барлық жиһазға бірдей кебу уақытын уәде етпейміз."
+          }
+        ]
+      },
+      "en": {
+        "title": "Upholstery Cleaning in Astana | Astana Cleaning Pro",
+        "description": "Sofa, armchair, mattress and fabric chair cleaning in Astana. Share photos for an assessment of upholstery, stains, treatment suitability and price.",
+        "h1": "Upholstery cleaning in Astana",
+        "intro": "Furniture treatment is selected after assessing the upholstery and soiling. Material, dimensions, condition and previous care matter for sofas, armchairs, mattresses and fabric-covered chairs.",
+        "sections": [
+          {
+            "heading": "Furniture to include in your enquiry",
+            "items": [
+              "Sofas: number of seats, straight or corner layout, dimensions and upholstery type.",
+              "Armchairs: size, material and affected areas.",
+              "Mattresses: dimensions, surface condition and the nature of the soiling.",
+              "Fabric chairs: quantity and the covering on seats and backs."
+            ]
+          },
+          {
+            "heading": "Request a preliminary assessment",
+            "text": "Send an overall photo and close-ups of stains. Share the care label if available and tell us about previous cleaning attempts. This helps assess suitability and limitations. The final price depends on the item, size, fabric and soiling, with conditions agreed before treatment."
+          },
+          {
+            "heading": "Realistic expectations",
+            "text": "An old stain, colour change or damaged material is not the same as removable dirt. Complete removal of stains or odours is not guaranteed in advance. Delicate or unidentified fabrics require assessment. Upholstery cleaning is not automatically included in apartment cleaning, so list each item when enquiring."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Can I get a price by simply saying 'sofa'?",
+            "a": "A useful estimate needs the size, number of seats, layout, fabric and photos of the condition. The prices page offers starting guides; the final amount follows assessment."
+          },
+          {
+            "q": "Will every stain and odour disappear?",
+            "a": "We do not promise that in advance. Results depend on the material, the type and age of the soiling, previous treatment and upholstery condition."
+          },
+          {
+            "q": "When can I use the furniture again?",
+            "a": "Aftercare and any use restrictions depend on the material and selected method. One drying time is not promised for every item."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "moika-okon-astana",
+      "related": [
+        "generalnaya-uborka-astana",
+        "uborka-posle-remonta-astana",
+        "uborka-ofisov-astana"
+      ],
+      "ru": {
+        "title": "Мытьё окон в Астане | Astana Cleaning Pro",
+        "description": "Мытьё окон, балконных блоков и витражей в Астане. Оценка по количеству, размерам, загрязнению и безопасному доступу. Услуга рассчитывается отдельно.",
+        "h1": "Мытьё окон в Астане",
+        "intro": "Мытьё окон можно согласовать отдельно от уборки помещения. Для расчёта нужны количество, размеры, тип остекления и возможность безопасного доступа к поверхностям.",
+        "sections": [
+          {
+            "heading": "Что показать для оценки",
+            "items": [
+              "Общий вид окон, балконного блока или витража.",
+              "Количество и примерные размеры, открывающиеся и глухие части.",
+              "Какие стороны нужно очистить и есть ли доступ из помещения.",
+              "Наличие следов ремонта, наклеек, старых загрязнений и чувствительных покрытий."
+            ]
+          },
+          {
+            "heading": "Безопасный доступ и сложное остекление",
+            "text": "Возможность наружной очистки, работа на высоте и труднодоступные участки рассматриваются индивидуально. Нельзя заранее обещать мойку любой наружной поверхности. Отправьте фотографии конструкции и опишите условия доступа, чтобы согласовать допустимый объём. Материал рам и стекла также влияет на выбор способа очистки."
+          },
+          {
+            "heading": "Окна и базовая уборка — разные работы",
+            "text": "Мытьё окон оплачивается отдельно. Очистка балкона, включённая в согласованную уборку, не означает автоматическое мытьё остекления. Стартовый ориентир указан на странице цен; итог зависит от числа окон, размеров, загрязнения и доступа. Добавьте услугу к расчёту или опишите отдельную задачу в WhatsApp."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Мытьё окон входит в генеральную уборку?",
+            "a": "Нет, оно рассчитывается отдельно. При заказе укажите нужные окна, их количество и условия доступа."
+          },
+          {
+            "q": "Можно ли вымыть окна снаружи на любом этаже?",
+            "a": "Возможность внешних и высотных работ определяется после оценки безопасного доступа. Заочно такие работы не подтверждаем."
+          },
+          {
+            "q": "Как рассчитывается большое остекление или витраж?",
+            "a": "Пришлите фото, количество секций, размеры и сведения об открывании. Необычное или труднодоступное остекление оценивается индивидуально."
+          }
+        ]
+      },
+      "kk": {
+        "title": "Астанада терезе жуу | Astana Cleaning Pro",
+        "description": "Астанада терезелерді, балкон блоктарын және витраждарды жуу. Саны, өлшемі, кірі және қауіпсіз қолжетімділігі бойынша бағаланады. Бөлек қызмет.",
+        "h1": "Астанада терезе жуу",
+        "intro": "Терезе жууды үй-жайды тазалаудан бөлек келісуге болады. Есеп үшін терезе саны, өлшемі, әйнектеу түрі және беттерге қауіпсіз қол жеткізу мүмкіндігі қажет.",
+        "sections": [
+          {
+            "heading": "Бағалау үшін не көрсету керек",
+            "items": [
+              "Терезенің, балкон блогының немесе витраждың жалпы көрінісі.",
+              "Саны, шамамен өлшемдері, ашылатын және ашылмайтын бөліктері.",
+              "Қай жақтарын жуу керек және іштен қолжетімді ме.",
+              "Жөндеу іздері, жапсырмалар, ескі кір және сезімтал жабындар."
+            ]
+          },
+          {
+            "heading": "Қауіпсіз қолжетімділік",
+            "text": "Сыртынан тазалау, биіктіктегі жұмыс және қол жетуі қиын жерлер жеке қарастырылады. Кез келген сыртқы бетті жууға алдын ала уәде бермейміз. Құрылым фотосын және қолжетімділік жағдайын жіберіңіз. Жақтау мен әйнек материалы да тазалау тәсіліне әсер етеді."
+          },
+          {
+            "heading": "Терезе жуу бөлек есептеледі",
+            "text": "Келісілген тазалауда балкон едені мен беттерін өңдеу әйнектерді жуу автоматты түрде кіретінін білдірмейді. Бастапқы бағдар бағалар бетінде көрсетілген; соңғы сома санына, өлшеміне, кірге және қолжетімділікке байланысты. Қызметті есепке қосыңыз немесе WhatsApp арқылы бөлек тапсырманы сипаттаңыз."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Терезе жуу күрделі тазалауға кіре ме?",
+            "a": "Жоқ, бөлек есептеледі. Қажетті терезелерді, санын және қолжетімділігін тапсырыста көрсетіңіз."
+          },
+          {
+            "q": "Кез келген қабатта сыртынан жууға бола ма?",
+            "a": "Сыртқы және биіктіктегі жұмыстың мүмкіндігі қауіпсіз қолжетімділікті бағалаған соң анықталады. Сырттай растамаймыз."
+          },
+          {
+            "q": "Үлкен әйнектеу немесе витраж қалай есептеледі?",
+            "a": "Фотосын, секция санын, өлшемдерін және ашылуы туралы мәліметті жіберіңіз. Ерекше немесе қол жетуі қиын әйнектеу жеке бағаланады."
+          }
+        ]
+      },
+      "en": {
+        "title": "Window Cleaning in Astana | Astana Cleaning Pro",
+        "description": "Window, balcony glazing and large glazed panel cleaning in Astana. Estimates depend on quantity, size, soiling and safe access. Separately priced service.",
+        "h1": "Window cleaning in Astana",
+        "intro": "Window washing can be arranged separately from cleaning a property. The estimate needs the quantity, dimensions, glazing type and information about safe access to the surfaces.",
+        "sections": [
+          {
+            "heading": "Information for an assessment",
+            "items": [
+              "An overall photo of the windows, balcony glazing or large glazed panels.",
+              "The number and approximate size of sections, including fixed and opening parts.",
+              "Which sides need cleaning and whether they can be reached from inside.",
+              "Any renovation residue, stickers, old deposits or sensitive finishes."
+            ]
+          },
+          {
+            "heading": "Safe access and difficult glazing",
+            "text": "Exterior cleaning, work at height and hard-to-reach areas need individual assessment. We cannot confirm cleaning of every exterior surface in advance. Send photos of the construction and describe access so the available scope can be agreed. Frame and glass materials also affect the method."
+          },
+          {
+            "heading": "Windows are separately priced",
+            "text": "Including balcony floors and accessible surfaces in a cleaning order does not automatically include the glazing. Starting guidance is on the prices page; the final amount depends on quantity, size, soiling and access. Add windows to your estimate or describe a separate task through WhatsApp."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Is window washing included in deep cleaning?",
+            "a": "No. It is separately priced. Tell us which windows you need, their quantity and access conditions."
+          },
+          {
+            "q": "Can you clean exterior windows on any floor?",
+            "a": "Exterior and high-level work must be assessed for safe access. Such work is not confirmed without that assessment."
+          },
+          {
+            "q": "How are large glazed areas assessed?",
+            "a": "Send photos, dimensions, the number of sections and details of which parts open. Unusual or difficult-to-reach glazing is assessed individually."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "uborka-ofisov-astana",
+      "related": [
+        "generalnaya-uborka-astana",
+        "moika-okon-astana",
+        "himchistka-mebeli-astana"
+      ],
+      "ru": {
+        "title": "Уборка офисов в Астане | Astana Cleaning Pro",
+        "description": "Поддерживающая и генеральная уборка офисов в Астане. Согласуем зоны, перечень работ, доступ и удобное время. Окна и химчистка рассчитываются отдельно.",
+        "h1": "Уборка офисов в Астане",
+        "intro": "Для офиса можно выбрать поддерживающий уход или более тщательную генеральную уборку. Формат зависит от площади, состояния помещений и перечня зон, которые нужно привести в порядок.",
+        "sections": [
+          {
+            "heading": "Какие задачи обсудить",
+            "items": [
+              "Доступные поверхности, полы, плинтусы, двери и ручки.",
+              "Кухонную зону: наружные поверхности гарнитура и согласованный перечень работ.",
+              "Санузлы, сантехнику, зеркала и доступные поверхности.",
+              "Отдельно — окна, тканевые стулья, кресла и другую мягкую мебель."
+            ]
+          },
+          {
+            "heading": "Режим уборки и доступ в офис",
+            "text": "Сообщите, нужен разовый визит или регулярное поддержание чистоты, и укажите желаемое время. Периодичность, возможность выезда и доступ согласуются заранее. Перечислите помещения и участки, к которым нельзя прикасаться, а также правила доступа к рабочим местам. Подготовку личных вещей, документации и техники лучше обсудить до начала работ."
+          },
+          {
+            "heading": "От чего зависит стоимость",
+            "text": "Для предварительной оценки нужны площадь, фотографии, состояние помещений и предполагаемый состав работ. Генеральная и поддерживающая уборка отличаются объёмом. Окна, внутренняя чистка техники и химчистка мебели не включаются автоматически. Итоговую сумму и перечень услуг согласуем до начала уборки; расчет на сайте остаётся ориентиром."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Есть ли регулярная уборка офиса?",
+            "a": "На сайте предусмотрена поддерживающая уборка офисов. Нужную периодичность и возможность обслуживания конкретного адреса согласуйте при обращении."
+          },
+          {
+            "q": "Можно ли выбрать время без сотрудников?",
+            "a": "Укажите желаемое время и правила доступа. Возможность такого графика нужно подтвердить отдельно; круглосуточный или немедленный выезд не обещается."
+          },
+          {
+            "q": "Входит ли химчистка офисных кресел и стульев?",
+            "a": "Она оценивается отдельно по количеству, размеру, типу ткани и состоянию обивки. Добавьте фотографии к запросу."
+          }
+        ]
+      },
+      "kk": {
+        "title": "Астанада кеңсе тазалау | Astana Cleaning Pro",
+        "description": "Астанада кеңсені тұрақты және күрделі тазалау. Аймақтар, жұмыс көлемі, қолжетімділік және уақыт алдын ала келісіледі. Терезе мен жиһаз бөлек есептеледі.",
+        "h1": "Астанада кеңсе тазалау",
+        "intro": "Кеңсе үшін тұрақты күтімді немесе мұқият күрделі тазалауды таңдауға болады. Формат аумаққа, үй-жай жағдайына және тазаланатын аймақтар тізіміне байланысты.",
+        "sections": [
+          {
+            "heading": "Қандай тапсырмаларды талқылау керек",
+            "items": [
+              "Қол жететін беттер, едендер, плинтустар, есіктер және тұтқалар.",
+              "Асүй аймағы: жиһаздың сыртқы беттері және келісілген жұмыс тізімі.",
+              "Дәретхана, сантехника, айналар және қол жететін беттер.",
+              "Бөлек — терезелер, мата орындықтар, креслолар және басқа жұмсақ жиһаз."
+            ]
+          },
+          {
+            "heading": "Тазалау тәртібі және кеңсеге кіру",
+            "text": "Бір реттік тазалау ма, әлде тұрақты күтім бе — соны және қалаған уақытыңызды жазыңыз. Жиілік, бару мүмкіндігі мен кіру шарттары алдын ала келісіледі. Қол тигізуге болмайтын орындарды және жұмыс орындарына кіру ережелерін көрсетіңіз. Жеке заттар, құжаттар және техника дайындығын жұмыс басталғанға дейін талқылаған дұрыс."
+          },
+          {
+            "heading": "Баға неге байланысты",
+            "text": "Алдын ала бағалау үшін аумақ, фотосуреттер, үй-жай жағдайы және қажетті жұмыстар тізімі керек. Тұрақты және күрделі тазалаудың көлемі әртүрлі. Терезе жуу, техниканың ішін және жиһазды химиялық тазалау автоматты түрде кірмейді. Соңғы сома мен қызметтер жұмыс басталғанға дейін келісіледі."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Кеңсені тұрақты тазалау бар ма?",
+            "a": "Сайтта кеңселерді тұрақты тазалау қарастырылған. Жиілігін және нақты мекенжайға қызмет көрсету мүмкіндігін өтініш кезінде келісіңіз."
+          },
+          {
+            "q": "Қызметкерлер жоқ уақытты таңдауға бола ма?",
+            "a": "Қалаған уақыт пен кіру ережелерін көрсетіңіз. Бұл кестенің мүмкіндігі бөлек расталады; тәулік бойы немесе бірден келуге уәде берілмейді."
+          },
+          {
+            "q": "Кеңсе креслолары мен орындықтарын тазалау кіре ме?",
+            "a": "Бөлек бағаланады: саны, өлшемі, матасы және қаптама жағдайы ескеріледі. Сұрауға фотосын қосыңыз."
+          }
+        ]
+      },
+      "en": {
+        "title": "Office Cleaning in Astana | Astana Cleaning Pro",
+        "description": "Maintenance and deep office cleaning in Astana. Agree the areas, scope, access and preferred time. Window washing and upholstery cleaning are separate.",
+        "h1": "Office cleaning in Astana",
+        "intro": "Choose maintenance care or a more thorough deep clean for an office. The format depends on the floor area, the property's condition and the spaces that need attention.",
+        "sections": [
+          {
+            "heading": "Tasks to discuss",
+            "items": [
+              "Accessible surfaces, floors, skirting boards, doors and handles.",
+              "Kitchen areas: cabinet exteriors and the agreed list of tasks.",
+              "Washrooms, sanitary fittings, mirrors and accessible surfaces.",
+              "Separately, windows, fabric chairs, armchairs and other upholstered furniture."
+            ]
+          },
+          {
+            "heading": "Cleaning arrangements and office access",
+            "text": "Tell us whether you need a single visit or regular maintenance, and share your preferred time. Frequency, availability and access must be agreed beforehand. Identify restricted rooms or surfaces and explain access rules for workstations. Discuss preparation of personal belongings, documents and equipment before cleaning starts."
+          },
+          {
+            "heading": "What affects the price",
+            "text": "An initial assessment needs the floor area, photos, condition and a proposed task list. Maintenance and deep cleaning have different scopes. Windows, appliance interiors and upholstery cleaning are not automatically included. The final price and scope are agreed before work; the online estimate remains a guide."
+          }
+        ],
+        "faq": [
+          {
+            "q": "Do you offer regular office cleaning?",
+            "a": "The site lists maintenance cleaning for offices. Discuss the frequency and availability for your particular address when enquiring."
+          },
+          {
+            "q": "Can cleaning take place when staff are absent?",
+            "a": "Share your preferred time and access rules. That schedule must be confirmed; round-the-clock or immediate visits are not promised."
+          },
+          {
+            "q": "Is cleaning office chairs included?",
+            "a": "This is assessed separately based on quantity, size, fabric and upholstery condition. Include photos with your enquiry."
+          }
+        ]
+      }
+    }
+  ]
+}
