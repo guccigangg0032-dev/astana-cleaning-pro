@@ -6,6 +6,7 @@ on:
     paths:
       - 'tools/generate_brand_assets.py'
       - 'tools/build.mjs'
+      - 'tools/package_release.py'
       - 'assets/mark.svg'
       - 'assets/favicon.svg'
       - '.github/workflows/generate-brand-pngs.yml'
@@ -27,11 +28,13 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci && npm run build && npm test
+      - name: Package tested Plesk runtime release
+        run: python tools/package_release.py deployment/acpro-brand-2026-10-17.zip
       - name: Commit generated runtime assets
         run: |
           git config user.name 'acpro-image-bot'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A -- assets/*.png '*.html' 'kk/*.html' 'en/*.html'
+          git add -A -- assets/*.png '*.html' 'kk/*.html' 'en/*.html' deployment/acpro-brand-2026-10-17.zip deployment/acpro-brand-2026-10-17.manifest.json
           if ! git diff --cached --quiet; then
             git commit -m 'Generate ACPro PNG icons and search previews'
             git push
