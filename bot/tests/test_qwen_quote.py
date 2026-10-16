@@ -41,6 +41,20 @@ class QwenQuoteTests(unittest.TestCase):
     def test_illegal_extra_rejected(self):
         self.assertIsNone(module.parse_extraction("сколько уборка",{"is_quote":True,"service":"extras","extras":["security_deposit"]}))
 
+    def test_model_cannot_add_unrequested_extras(self):
+        user="Сколько стоит генеральная уборка 50 м2?"
+        malicious={"is_quote":True,"service":"general","area":50,"extras":["sofa","windows"],"width_cm":None,"multiple_items":False}
+        r=module.parse_extraction(user,malicious)
+        self.assertEqual(r["extras"],[])
+        self.assertEqual(module.calculate(r)["amount_from"],45000)
+
+    def test_model_cannot_invent_unsupported_service_type(self):
+        text="Сколько за уборку 50 м2?"
+        model={"is_quote":True,"service":"renovation","area":50,"extras":[],"width_cm":None,"multiple_items":False}
+        r=module.parse_extraction(text,model)
+        self.assertIsNone(r["service"])
+        self.assertEqual(module.calculate(r)["kind"],"needs_details")
+
     def test_duplicate_safeguard(self):
         model={"is_quote":True,"service":"extras","area":None,"extras":["sofa"],"width_cm":None,"multiple_items":False}
         r=module.parse_extraction("Сколько стоят 3 дивана?",model)
