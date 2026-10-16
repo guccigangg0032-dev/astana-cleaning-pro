@@ -10,7 +10,7 @@ root = Path(__file__).resolve().parents[1]
 output = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else root / 'release.zip'
 files = [p for p in root.rglob('*') if p.is_file()
          and not any(part in {'.git', 'node_modules', 'tools', 'deployment'} for part in p.relative_to(root).parts)
-         and (p.suffix in {'.html', '.js', '.css', '.svg'}
+         and (p.suffix in {'.html', '.js', '.css', '.svg', '.png'}
               or p.name in {'.htaccess', 'robots.txt', 'sitemap.xml', 'metrics.php'})]
 manifest = []
 with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as archive:
