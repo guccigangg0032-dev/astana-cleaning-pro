@@ -1,0 +1,27 @@
+name: Package ACPro PNG branding for Plesk
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/package_brand_release.py'
+      - '.github/workflows/package-brand-release.yml'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - run: python tools/package_brand_release.py
+      - name: Commit self-contained production import ZIP
+        run: |
+          git config user.name 'acpro-image-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f deployment/acpro-brand-png-2026-10-17.zip
+          if ! git diff --cached --quiet; then
+            git commit -m 'Package PNG branding for Hoster Plesk'
+            git push
+          fi
