@@ -1,0 +1,404 @@
+[
+  {
+    "path": ".htaccess",
+    "bytes": 1350,
+    "mode": "0644",
+    "sha256": "cc797c3d352f7b08a27e844f850ee45541ee61dfe70f0d726f10076685aaef06"
+  },
+  {
+    "path": "about.html",
+    "bytes": 11966,
+    "mode": "0644",
+    "sha256": "d7f030450196eb4f65e0e340775e3ab44ab0ca7b683627c38e1778f4f109a7fd"
+  },
+  {
+    "path": "assets/apple-touch-icon.png",
+    "bytes": 2368,
+    "mode": "0644",
+    "sha256": "e44880d1c6edeab5adc5eaf41dedebbc64654d6e756fe6b88f3d0b85118d3fec"
+  },
+  {
+    "path": "assets/favicon-32.png",
+    "bytes": 761,
+    "mode": "0644",
+    "sha256": "38e99cecd43c1054c435649fc843e0331cd5ccb6d5aceaa81cfe54a2735091b7"
+  },
+  {
+    "path": "assets/favicon-48.png",
+    "bytes": 936,
+    "mode": "0644",
+    "sha256": "2d971ed92cb4e616aab1fc67ccc0451ddef33f7c8bdcfc6b8ccad432a1edba5c"
+  },
+  {
+    "path": "assets/favicon.svg",
+    "bytes": 376,
+    "mode": "0644",
+    "sha256": "5f82562c0ed4f01aa1244ced540828c3613d681fc5610bb1c08d54e50ed1e9a0"
+  },
+  {
+    "path": "assets/hero-room.svg",
+    "bytes": 4325,
+    "mode": "0644",
+    "sha256": "b72fb2b7ec5e802a78656c33e05c0f7136314df53914ebe0de99608e1bcf37fa"
+  },
+  {
+    "path": "assets/logo-1024.png",
+    "bytes": 13506,
+    "mode": "0644",
+    "sha256": "e3ed70433dc3c5e5a611b1085030fba67129badca2f376f3f1a317430d48904a"
+  },
+  {
+    "path": "assets/logo-512.png",
+    "bytes": 6391,
+    "mode": "0644",
+    "sha256": "c63d3bf6dcbc06467f18f7936788519540af131c6718e69b7812bc58a039ec0c"
+  },
+  {
+    "path": "assets/mark.svg",
+    "bytes": 696,
+    "mode": "0644",
+    "sha256": "efa4a95eaeed14dfbd647d784a93f4bfc22610b438e13d724251ef779cee11f9"
+  },
+  {
+    "path": "assets/og-image-1200x630.png",
+    "bytes": 11902,
+    "mode": "0644",
+    "sha256": "b6e1074b20f61af70d45affbae9bbc82936f74b03f39efb063a1e14d5384b0f8"
+  },
+  {
+    "path": "careers.html",
+    "bytes": 14553,
+    "mode": "0644",
+    "sha256": "91c8ca4f4d468b8eabe8d246bee3451068bc287689b25d49f3644fc3b2a5520e"
+  },
+  {
+    "path": "contact.html",
+    "bytes": 9739,
+    "mode": "0644",
+    "sha256": "b908daf540713134461c6234eeed202936751e349b4de77a4cbda7a18149b543"
+  },
+  {
+    "path": "en/about.html",
+    "bytes": 9643,
+    "mode": "0644",
+    "sha256": "a2e86262521995d035f529c6302895eefbc424f5e9d403e001c5e6d5283afc75"
+  },
+  {
+    "path": "en/careers.html",
+    "bytes": 11468,
+    "mode": "0644",
+    "sha256": "45e01cd0614b1f2c223458089da86c7f38c4968f20046da0e5c788f44e5d0395"
+  },
+  {
+    "path": "en/contact.html",
+    "bytes": 8223,
+    "mode": "0644",
+    "sha256": "e3729832e0432664bdd9c01b7d83c84f7f8fd8fce55712f168d447a6aaa05607"
+  },
+  {
+    "path": "en/faq.html",
+    "bytes": 9798,
+    "mode": "0644",
+    "sha256": "b975028bfe3bb51c730fe7edcb4707f5b5e5b09a9317c2929c50a85f45479aaf"
+  },
+  {
+    "path": "en/generalnaya-uborka-astana.html",
+    "bytes": 12280,
+    "mode": "0644",
+    "sha256": "84a8d2d94a3cacb954dae7878668a61b377218dd07f90aff25ae4fe1d13d42c9"
+  },
+  {
+    "path": "en/himchistka-mebeli-astana.html",
+    "bytes": 12153,
+    "mode": "0644",
+    "sha256": "1bb01a0e2992dad4fa8cbb9b8b0e1a7540ca98665ddaeca0952a9c943b213b4c"
+  },
+  {
+    "path": "en/index.html",
+    "bytes": 14066,
+    "mode": "0644",
+    "sha256": "7f5df47589fb6d9696758890da237b167046b6dcef55183fb890d8b7ab836ada"
+  },
+  {
+    "path": "en/induction.html",
+    "bytes": 10418,
+    "mode": "0644",
+    "sha256": "c4a84c1b07422c516b4f26abf8539f8f5dd489eceda28098126525da0b922aaf"
+  },
+  {
+    "path": "en/moika-okon-astana.html",
+    "bytes": 11974,
+    "mode": "0644",
+    "sha256": "1127a69bfc09412e3fefed391ffa321e717d286b94ee7479fd8441ef2aad0157"
+  },
+  {
+    "path": "en/partners.html",
+    "bytes": 9262,
+    "mode": "0644",
+    "sha256": "e634a01aac3a10a38ea60ecae2e96154abb00b25560e0d48e3263a7bc06dfbc4"
+  },
+  {
+    "path": "en/prices.html",
+    "bytes": 11521,
+    "mode": "0644",
+    "sha256": "ceaafecc92c7e4860513bb0f046a48064922a99ad4a588bb946b8ca8d44f00e1"
+  },
+  {
+    "path": "en/services.html",
+    "bytes": 18762,
+    "mode": "0644",
+    "sha256": "a669fe598063d59e3baf7ea835ba9f322a713b2bdfea85e281831eb47753a0db"
+  },
+  {
+    "path": "en/uborka-kvartir-astana.html",
+    "bytes": 12207,
+    "mode": "0644",
+    "sha256": "9da6a22e16ebea79bd6ae4852db405551cd4d5cf44815dfe6eaec660bbd9b3d4"
+  },
+  {
+    "path": "en/uborka-ofisov-astana.html",
+    "bytes": 11959,
+    "mode": "0644",
+    "sha256": "6e1dfa9ef863dded9a563415428bcf809349798226234f1ec38ed3a1b7bfd88c"
+  },
+  {
+    "path": "en/uborka-posle-remonta-astana.html",
+    "bytes": 12331,
+    "mode": "0644",
+    "sha256": "2fa4f887265a1ee5e96aaeb6cb6e43d9eee984fdc58aaf027f57e1c0354286fd"
+  },
+  {
+    "path": "faq.html",
+    "bytes": 12437,
+    "mode": "0644",
+    "sha256": "dc988344fdb9e6d985201eca71b60e4ee4fe03cb731f19797c63af4164c52a7d"
+  },
+  {
+    "path": "generalnaya-uborka-astana.html",
+    "bytes": 16020,
+    "mode": "0644",
+    "sha256": "5de28496e7d9dcff65d269a52c967ec15e85e2b09c76885c066218ecd83da6a8"
+  },
+  {
+    "path": "google3173ee84058fca87.html",
+    "bytes": 53,
+    "mode": "0644",
+    "sha256": "a73d8f75f12a2e79364fe0ec4173289eff8503191ac92470065337eff473e828"
+  },
+  {
+    "path": "himchistka-mebeli-astana.html",
+    "bytes": 15721,
+    "mode": "0644",
+    "sha256": "ced245ae7faeb094de055080c1727599dbd247429ca8f6b3ac145e37ed9c02a5"
+  },
+  {
+    "path": "index.html",
+    "bytes": 18119,
+    "mode": "0644",
+    "sha256": "74458c6ac58154f103b0af00f0f711a6928ca9bab939e2ec1dca13c53c07ed33"
+  },
+  {
+    "path": "induction.html",
+    "bytes": 13524,
+    "mode": "0644",
+    "sha256": "c1cc90df0744180ac933c9cbc3822d1074686a467ee08d8297048b696346322e"
+  },
+  {
+    "path": "kk/about.html",
+    "bytes": 12434,
+    "mode": "0644",
+    "sha256": "c3fc722d7cfcec74ceb9fa3f29bdb91570e00e38676c00a6dfc7b50005c26701"
+  },
+  {
+    "path": "kk/careers.html",
+    "bytes": 14663,
+    "mode": "0644",
+    "sha256": "1ae5217c281aaf861ead9eea42a0d9e860d0f7ecd42bf21e024f36d5ceacca8f"
+  },
+  {
+    "path": "kk/contact.html",
+    "bytes": 10339,
+    "mode": "0644",
+    "sha256": "aa1ae6ff2915a82d67f918be7a6ec353dcf48025b2f2e0f48bbcdcaf57ea072c"
+  },
+  {
+    "path": "kk/faq.html",
+    "bytes": 13101,
+    "mode": "0644",
+    "sha256": "c7c86e05b661daedfd25d07e11c324fa381d6ce2da66e5c8d81861da47183d9a"
+  },
+  {
+    "path": "kk/generalnaya-uborka-astana.html",
+    "bytes": 16039,
+    "mode": "0644",
+    "sha256": "14517857633ddb4825d5260f3c3f6fbedf47484ec4ddc3dbdbdc226676f7e374"
+  },
+  {
+    "path": "kk/himchistka-mebeli-astana.html",
+    "bytes": 16170,
+    "mode": "0644",
+    "sha256": "bf04aea67d9ddb1c08f3cbc1e8aa95c355f62ab47389a6d8182f99db28a6ddb4"
+  },
+  {
+    "path": "kk/index.html",
+    "bytes": 18851,
+    "mode": "0644",
+    "sha256": "89175428841d73a4d0ac73082b7a39dd4b19e2f3e78bce20cccb0abf25145003"
+  },
+  {
+    "path": "kk/induction.html",
+    "bytes": 13455,
+    "mode": "0644",
+    "sha256": "bb40d68174ea07a3f0828b548d3200642e9501079e118b23017c091d1a758bc6"
+  },
+  {
+    "path": "kk/moika-okon-astana.html",
+    "bytes": 15420,
+    "mode": "0644",
+    "sha256": "c106eda445d203c264493d0326b0e3ad7dbb0148540f81172794e5b0f81b9df1"
+  },
+  {
+    "path": "kk/partners.html",
+    "bytes": 11691,
+    "mode": "0644",
+    "sha256": "a7c35847edb8f46b8b9b8803037a519044ee0adc55695d63bee96da8cb954cff"
+  },
+  {
+    "path": "kk/prices.html",
+    "bytes": 14718,
+    "mode": "0644",
+    "sha256": "f89ea333742bf127a39bbd1009802c7627a465a65702e1f957cfe8af5c139861"
+  },
+  {
+    "path": "kk/services.html",
+    "bytes": 26836,
+    "mode": "0644",
+    "sha256": "a7d2a45157b9527b34e712cda96e3e98787e06decf3da9ebce3445cc913a4cce"
+  },
+  {
+    "path": "kk/uborka-kvartir-astana.html",
+    "bytes": 15936,
+    "mode": "0644",
+    "sha256": "49ec5590fbde985417635a3ca2a90568d4f154623cc7f41759e66a4842248d4e"
+  },
+  {
+    "path": "kk/uborka-ofisov-astana.html",
+    "bytes": 15955,
+    "mode": "0644",
+    "sha256": "deb47e7e66124eb0c10e928fee71d2c316d45466933c8ce2d8382d3e2bde4975"
+  },
+  {
+    "path": "kk/uborka-posle-remonta-astana.html",
+    "bytes": 16149,
+    "mode": "0644",
+    "sha256": "7419199b5a5f1d51e6c743feaa2195162d198c540732e582a8adc621c52b19dc"
+  },
+  {
+    "path": "metrics.js",
+    "bytes": 9034,
+    "mode": "0644",
+    "sha256": "95f71da4653ff5fd74cb8accadeab830d0f06591fc4e456893bd22890fd84dc0"
+  },
+  {
+    "path": "metrics.php",
+    "bytes": 7775,
+    "mode": "0644",
+    "sha256": "9934958c6913ddcb038f80296b27ce0ae1ce0603bfc03e93019347ba017a1de0"
+  },
+  {
+    "path": "moika-okon-astana.html",
+    "bytes": 15200,
+    "mode": "0644",
+    "sha256": "89912e235c11a9cb47eae799ab0583b0ca05768fb4ba4b20251b54f273fad938"
+  },
+  {
+    "path": "multi.css",
+    "bytes": 20721,
+    "mode": "0644",
+    "sha256": "e8ac966f75b396768998739271c9f8a4ec28e7f8b5c949bcb3b05e4a264b694a"
+  },
+  {
+    "path": "partners.html",
+    "bytes": 11284,
+    "mode": "0644",
+    "sha256": "cc088dcd48e28da32db63283fcfa48c6a669094e8216a73af92b0cf9b9abf20c"
+  },
+  {
+    "path": "prices.html",
+    "bytes": 14343,
+    "mode": "0644",
+    "sha256": "cde581df75cd7d22b2216ee05e34769e26d819f31e5d790a882836a2b524c66f"
+  },
+  {
+    "path": "privacy.html",
+    "bytes": 7972,
+    "mode": "0644",
+    "sha256": "205c0c93e53d9c63a29d8d040952989bb764e37b91bb05e500bbd68a66c87629"
+  },
+  {
+    "path": "robots.txt",
+    "bytes": 62,
+    "mode": "0644",
+    "sha256": "8193339756ee34ebfa08ebdae88cb9997343fd2713e562e44a991c3fe664174f"
+  },
+  {
+    "path": "script.js",
+    "bytes": 3685,
+    "mode": "0644",
+    "sha256": "800831b0394ddb414f2aa6c6e61bc05bdc11bc1c7f0a16d2186eac9a128add5d"
+  },
+  {
+    "path": "service-content.js",
+    "bytes": 58678,
+    "mode": "0644",
+    "sha256": "480fa241da7e6c7198e05b855e19cd2b0046d8560f8158031f8f8936af973618"
+  },
+  {
+    "path": "services.html",
+    "bytes": 25581,
+    "mode": "0644",
+    "sha256": "edfa0805f4395b0a03ec080a55ba02c4e8b6fed9fad031fe944a586acb08779f"
+  },
+  {
+    "path": "site.js",
+    "bytes": 113571,
+    "mode": "0644",
+    "sha256": "e3c307a74a0d37481adbdef5a30847e47ee32551e4e2f06d3399190ea5edf50e"
+  },
+  {
+    "path": "sitemap.xml",
+    "bytes": 2776,
+    "mode": "0644",
+    "sha256": "832392bbf22a1d853f6ffc2182c2cc8040b3338ff2904d46d54ec08f8b5d6b63"
+  },
+  {
+    "path": "styles.css",
+    "bytes": 21632,
+    "mode": "0644",
+    "sha256": "a3e8817dc11c8759fa28047044e13d5153f264386f99ce0e5bd853e803b88ad7"
+  },
+  {
+    "path": "uborka-kvartir-astana.html",
+    "bytes": 15754,
+    "mode": "0644",
+    "sha256": "cadb7af318d54c08d7448ce4592936db4ecfc5d5f02caa2535220681b0c836bb"
+  },
+  {
+    "path": "uborka-ofisov-astana.html",
+    "bytes": 15578,
+    "mode": "0644",
+    "sha256": "fcd57dfb7aefa4a7945e2748e9d77f6f5217a92b95ba4e00e9a71735b413b186"
+  },
+  {
+    "path": "uborka-posle-remonta-astana.html",
+    "bytes": 16024,
+    "mode": "0644",
+    "sha256": "b5972aee4cad9c3df15ec80e72d4fca3d51427eaedc58b9de58ab52c4cbbbf93"
+  },
+  {
+    "path": "yandex_5058f243df71d3d4.html",
+    "bytes": 162,
+    "mode": "0644",
+    "sha256": "10c7818b6f171d9532d1444c936cc0a0fa27a4e20b2f04e7e7a1733f721e645c"
+  }
+]
