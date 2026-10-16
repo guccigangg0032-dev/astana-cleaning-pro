@@ -9,11 +9,11 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"deployment/acpro-brand-png-2026-10-17.zip"
 PNGS=["logo-512.png","logo-1024.png","favicon-32.png","favicon-48.png","apple-touch-icon.png","og-image-1200x630.png"]
 files=[ROOT/"assets"/name for name in PNGS]
-files += sorted(x for x in ROOT.glob("*.html") if x.is_file() and not x.name.startswith(("google", "yandex_")))
+files += sorted(x for x in ROOT.glob("*.html") if x.is_file() and not x.name.startswith(("google", "yandex_")) and x.name != "privacy.html")
 for sub in ("kk","en"):
     files+=sorted((ROOT/sub).glob("*.html"))
-if len(files)<52:
-    raise RuntimeError(f"Unexpected release contents: {len(files)} (need 6 PNGs + 46 HTML pages)")
+if len(files)<51:
+    raise RuntimeError(f"Unexpected release contents: {len(files)} (need 6 PNGs + 45 generated HTML pages)")
 for path in files:
     if not path.is_file():
         raise FileNotFoundError(path)
