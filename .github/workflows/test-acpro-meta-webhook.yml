@@ -1,0 +1,22 @@
+name: ACPro Meta Webhook security tests
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - '.github/workflows/test-acpro-meta-webhook.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify PHP syntax
+        run: |
+          php -l automation/api/ig-webhook.php
+          php -l automation/api/ig-relay.php
+          php -l automation/config.example.php
+      - name: Verify webhook handshake and signature
+        run: python3 automation/tests/test_webhook.py -v
