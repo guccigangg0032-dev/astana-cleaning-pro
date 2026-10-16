@@ -1,0 +1,38 @@
+name: Generate ACPro PNGs
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/generate_brand_assets.py'
+      - 'tools/build.mjs'
+      - 'assets/mark.svg'
+      - 'assets/favicon.svg'
+      - '.github/workflows/generate-brand-pngs.yml'
+permissions:
+  contents: write
+jobs:
+  png-and-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --disable-pip-version-check 'Pillow>=11,<13' 'CairoSVG>=2.7,<3'
+      - run: python tools/generate_brand_assets.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci && npm run build && npm test
+      - name: Commit generated runtime assets
+        run: |
+          git config user.name 'acpro-image-bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- assets/*.png '*.html' 'kk/*.html' 'en/*.html'
+          if ! git diff --cached --quiet; then
+            git commit -m 'Generate ACPro PNG icons and search previews'
+            git push
+          fi
