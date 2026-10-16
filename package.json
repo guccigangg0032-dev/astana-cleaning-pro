@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "scripts": {
     "build": "node tools/build.mjs",
-    "test": "node tools/check.mjs && node tools/calculators.test.mjs"
+    "test": "node tools/check.mjs && node tools/calculators.test.mjs && node tools/service-cta.test.mjs"
   },
   "devDependencies": {
     "jsdom": "26.1.0"

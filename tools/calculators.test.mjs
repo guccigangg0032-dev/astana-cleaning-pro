@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {JSDOM,VirtualConsole} from 'jsdom';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const reportPath=path.resolve(root,'../../outputs/seo-2026-10-16/CALCULATOR_TESTS.json');
+const reportPath=process.env.ACPRO_CALCULATOR_REPORT?path.resolve(process.env.ACPRO_CALCULATOR_REPORT):path.resolve(root,'../../outputs/seo-2026-10-16/CALCULATOR_TESTS.json');
 const startedAt=new Date().toISOString();
 const results=[];
 let attemptedNetworkRequests=0,mockedWhatsAppOpens=0;

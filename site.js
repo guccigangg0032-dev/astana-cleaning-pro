@@ -14,6 +14,10 @@ const t=DATA[lang];document.documentElement.lang=lang;const page=ids.includes(do
 const current=ids.indexOf(page);
 const localePath=(file,code=lang)=>'/'+(code==='ru'?'':code+'/')+(file==='index.html'?'':file);
 const href=(p)=>localePath(pages[ids.indexOf(p)]);
+const estimateHref=service=>href('prices')+'?service='+service+'#'+(service==='extras'?'extraNotice':'estimate');
+// Only use tariffs that the calculator actually supports. Offices need an individual quote.
+const estimateTypes={'uborka-kvartir-astana':'general','generalnaya-uborka-astana':'general','uborka-posle-remonta-astana':'renovation','himchistka-mebeli-astana':'extras','moika-okon-astana':'extras'};
+const chooseType=lang==='ru'?'Выбрать вид уборки':lang==='kk'?'Тазалау түрін таңдау':'Choose a cleaning type';
 if(location.hostname.endsWith('.github.io')){location.replace('https://acpro.kz'+localePath(pages[current])+location.search+location.hash);return;}
 const wapp=(msg)=>'https://wa.me/77776146664?text='+encodeURIComponent(msg||t.waContact);
 const partnerWapp=(msg)=>'https://wa.me/77760001966?text='+encodeURIComponent(msg||t.partners.waIntro);
@@ -29,12 +33,12 @@ const header='<div class="announcement"><div class="container announcement-inner
 '<div class="language-picker"><label for="langSelect" class="sr-only">Language / Тіл / Язык</label><select id="langSelect" aria-label="Language / Тіл / Язык"><option value="ru">RU</option><option value="kk">ҚАЗ</option><option value="en">EN</option></select></div>'+
 '<a class="header-cta" href="'+pageWhatsApp+'" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a><button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></button></div></header>';
 const footer='<footer class="footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="'+href('home')+'">'+brand+'</a><p>'+t.footer+'</p></div><div><b>'+t.nav[0]+'</b>'+t.nav.slice(1).map((x,i)=>'<a href="'+href(ids[i+1])+'">'+x+'</a>').join('')+'</div><div><b>'+t.nav[8]+'</b><a href="'+pageTel+'">'+pagePhone+'</a><a href="'+pageWhatsApp+'" target="_blank" rel="noopener noreferrer">WhatsApp</a><span>'+t.region+'</span></div></div><div class="container footer-bottom"><span>© <span id="currentYear">'+new Date().getFullYear()+'</span> ASTANA CLEANING PRO</span><span>'+t.footerRights+'</span></div></footer>'+
-'<div class="mobile-bar"><a href="'+href(page==='induction'?'induction':'prices')+'">✦ '+t.calculate+'</a><a href="'+pageWhatsApp+'" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div>';
+'<div class="mobile-bar"><a href="'+(page==='uborka-ofisov-astana'?wapp():page==='induction'?href('induction'):estimateTypes[page]?estimateHref(estimateTypes[page]):href('prices'))+'">✦ '+(page==='uborka-ofisov-astana'?t.confirm:page==='uborka-kvartir-astana'?chooseType:t.calculate)+'</a><a href="'+pageWhatsApp+'" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div>';
 const pagehead=(tag,title,lead)=>'<section class="subpage-head section"><div class="container"><span class="kicker">'+tag+'</span><h1>'+title+'</h1><p>'+lead+'</p></div></section>';
 const cta=()=>'<section class="final-cta section"><div class="container"><div class="cta-shell"><div><span class="kicker light">ASTANA CLEANING PRO</span><h2>'+t.home.ctaTitle+'</h2><p>'+t.home.ctaLead+'</p><div class="cta-actions">'+link(t.write,wapp(),'btn btn-white')+'<a class="call-link" href="tel:+77776146664">+7 777 614 66 64</a></div></div><div class="cta-decoration"><img src="/assets/mark.svg" alt=""></div></div></div></section>';
 const serviceCard=(s,i)=>'<article class="service-card"><span class="service-symbol" aria-hidden="true">'+icons[i%icons.length]+'</span><h3>'+s[0]+'</h3><p>'+s[1]+'</p>'+
  (i<2?'<a class="service-scope-link" href="'+href('services')+'#'+(i===0?'scope-general':'scope-maintenance')+'">'+t.scopes.title+' ↗</a>':'')+
- ([0,1,2,3,6].includes(i)?'<a class="service-scope-link" href="'+href(serviceSlugs[({0:1,1:0,2:2,3:3,6:4})[i]])+'">'+t.more+' ↗</a>':'')+'<div class="service-foot"><strong>'+(s[2]?t.from+' '+s[2]:t.individual)+'</strong><a href="'+(s[3]==='contact'?wapp(t.waContact+' '+s[0]):s[3]==='induction'?href('induction'):href('prices'))+'">'+t.confirm+' ↗</a></div></article>';
+ ([0,1,2,3,6].includes(i)?'<a class="service-scope-link" href="'+href(serviceSlugs[({0:1,1:0,2:2,3:3,6:4})[i]])+'">'+t.more+' ↗</a>':'')+'<div class="service-foot"><strong>'+(s[2]?t.from+' '+s[2]:t.individual)+'</strong><a href="'+(s[3]==='contact'?wapp(t.waContact+' '+s[0]):s[3]==='induction'?href('induction'):estimateHref(s[3]))+'">'+t.confirm+' ↗</a></div></article>';
 const scopes=()=>{
  const q=t.scopes;
  const list=arr=>'<ul class="scope-list">'+arr.map(x=>'<li><span class="scope-check">✓</span><span>'+x+'</span></li>').join('')+'</ul>';
@@ -199,9 +203,10 @@ const serviceView=()=>{
  if(!item)return services();
  const label=lang==='ru'?['Главная','Услуги','Другие услуги','Вопросы об услуге']:lang==='kk'?['Басты бет','Қызметтер','Басқа қызметтер','Қызмет туралы сұрақтар']:['Home','Services','Related services','Service questions'];
  const record=window.ACProServiceContent.pages.find(x=>x.slug===page);
+ const estimateCta=page==='uborka-ofisov-astana'?link(t.confirm,wapp(item.h1)):link(page==='uborka-kvartir-astana'?chooseType:t.calculate,estimateHref(estimateTypes[page]));
  const list=arr=>'<ul class="scope-list">'+arr.map(x=>'<li><span class="scope-check">✓</span><span>'+x+'</span></li>').join('')+'</ul>';
  return '<nav class="container breadcrumbs" aria-label="Breadcrumb"><a href="'+href('home')+'">'+label[0]+'</a> / <a href="'+href('services')+'">'+label[1]+'</a> / <span>'+item.h1+'</span></nav>'+pagehead(label[1],item.h1,item.intro)+
- '<section class="section service-detail"><div class="container"><div class="scope-grid">'+item.sections.map(x=>'<article class="scope-card"><h2>'+x.heading+'</h2>'+(x.text?'<p>'+x.text+'</p>':'')+(x.items?list(x.items):'')+'</article>').join('')+'</div><p class="price-note">'+t.pricingNote+'</p><div class="hero-buttons">'+link(t.calculate,href('prices'))+link(t.write,wapp(item.h1),'btn btn-secondary')+'</div></div></section>'+
+ '<section class="section service-detail"><div class="container"><div class="scope-grid">'+item.sections.map(x=>'<article class="scope-card"><h2>'+x.heading+'</h2>'+(x.text?'<p>'+x.text+'</p>':'')+(x.items?list(x.items):'')+'</article>').join('')+'</div><p class="price-note">'+t.pricingNote+'</p><div class="hero-buttons">'+estimateCta+(page==='uborka-ofisov-astana'?'':link(t.write,wapp(item.h1),'btn btn-secondary'))+'</div></div></section>'+
  '<section class="section faq"><div class="container"><h2>'+label[3]+'</h2><div class="faq-items standalone-faq">'+item.faq.map(x=>'<details><summary>'+x.q+'<span aria-hidden="true">+</span></summary><p>'+x.a+'</p></details>').join('')+'</div></div></section>'+
  '<section class="section"><div class="container"><h2>'+label[2]+'</h2><div class="service-links">'+record.related.map(slug=>{const other=window.ACProServiceContent.pages.find(x=>x.slug===slug);return '<a href="'+href(slug)+'">'+other[lang].h1+' ↗</a>'}).join('')+'</div></div></section>'+cta();
 };
