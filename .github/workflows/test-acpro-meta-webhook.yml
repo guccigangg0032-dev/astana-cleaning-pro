@@ -5,6 +5,11 @@ on:
     paths:
       - 'automation/**'
       - '.github/workflows/test-acpro-meta-webhook.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - '.github/workflows/test-acpro-meta-webhook.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,3 +25,16 @@ jobs:
           php -l automation/config.example.php
       - name: Verify webhook handshake and signature
         run: python3 automation/tests/test_webhook.py -v
+      - name: Parse Windows permanent Direct agent
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path ./automation/windows/ACPRO_DIRECT_POLL.ps1).Path,
+            [ref]$tokens, [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | Format-List
+            throw 'PowerShell parser reported errors'
+          }

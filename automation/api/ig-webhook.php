@@ -45,8 +45,30 @@ if (!is_string($signature) || !hash_equals($expected, $signature)) respond(403, 
 function saveWebhookStatus(string $configFile, array $status): void {
     $target = dirname($configFile) . '/webhook-status.json';
     if (is_link($target)) return;
+    // Preserve the ten latest *metadata-only* events. A read receipt can otherwise
+    // overwrite the diagnostic record for an actual Direct message.
+    $fp = @fopen($target, 'c+');
+    if ($fp === false) return;
+    if (!flock($fp, LOCK_EX)) { fclose($fp); return; }
+    $previous = json_decode(stream_get_contents($fp) ?: '', true);
+    $history = is_array($previous['recent_events'] ?? null) ? $previous['recent_events'] : [];
+    $historyEntry = [
+        'time' => $status['astana_time'],
+        'object' => $status['object'],
+        'messaging_events' => $status['messaging_events'],
+        'queued' => $status['queued'],
+        'skipped_account_id' => $status['skipped_account_id'],
+        'skipped_no_message' => $status['skipped_no_message'],
+        'event_types' => $status['event_types'],
+    ];
+    $status['recent_events'] = array_slice(array_merge([$historyEntry], $history), 0, 10);
     $json = json_encode($status, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
-    @file_put_contents($target, $json, LOCK_EX);
+    rewind($fp);
+    ftruncate($fp, 0);
+    fwrite($fp, $json);
+    fflush($fp);
+    flock($fp, LOCK_UN);
+    fclose($fp);
     @chmod($target, 0600);
 }
 try { $event = json_decode($raw, true, 32, JSON_THROW_ON_ERROR); }
@@ -54,9 +76,10 @@ catch (JsonException $e) { respond(400, 'Bad JSON'); }
 $log = [
     'astana_time' => gmdate('Y-m-d H:i:s', time() + 5 * 3600),
     'signature' => 'valid',
-    'object' => ($event['object'] ?? null) === 'instagram' ? 'instagram' : 'other',
+    'object' => in_array(($event['object'] ?? null), ['instagram','page'], true) ? $event['object'] : 'other',
     'entries' => is_array($event['entry'] ?? null) ? count($event['entry']) : 0,
     'messaging_events' => 0,
+    'event_types' => ['text_message'=>0, 'message_no_text'=>0, 'read'=>0, 'delivery'=>0, 'postback'=>0, 'other'=>0],
     'queued' => 0,
     'skipped_account_id' => 0,
     'skipped_no_message' => 0,
@@ -79,8 +102,17 @@ foreach (($event['entry'] ?? []) as $entry) {
     if ((string)($entry['id'] ?? '') !== $ownAccount) { $log['skipped_account_id']++; continue; }
     foreach (($entry['messaging'] ?? []) as $item) {
         $log['messaging_events']++;
-        if (!is_array($item) || !is_array($item['message'] ?? null)) { $log['skipped_no_message']++; continue; }
+        if (!is_array($item) || !is_array($item['message'] ?? null)) {
+            $kind = is_array($item) && array_key_exists('read',$item) ? 'read' :
+                (is_array($item) && array_key_exists('delivery',$item) ? 'delivery' :
+                (is_array($item) && array_key_exists('postback',$item) ? 'postback' : 'other'));
+            $log['event_types'][$kind]++;
+            $log['skipped_no_message']++;
+            continue;
+        }
         $message = $item['message'];
+        $kind = is_string($message['text'] ?? null) && trim($message['text']) !== '' ? 'text_message' : 'message_no_text';
+        $log['event_types'][$kind]++;
         if (!empty($message['is_echo']) || !empty($message['is_deleted'])) { $log['skipped_echo_or_deleted']++; continue; }
         $sender = (string)($item['sender']['id'] ?? '');
         $recipient = (string)($item['recipient']['id'] ?? '');

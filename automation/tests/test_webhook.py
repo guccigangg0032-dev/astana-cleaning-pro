@@ -33,9 +33,27 @@ class WebhookTests(unittest.TestCase):
   log=json.loads(raw)
   self.assertEqual(log['skipped_account_id'],1)
   self.assertEqual(log['queued'],0)
+  self.assertEqual(log['event_types']['other'],0)
+  self.assertEqual(len(log['recent_events']),1)
   self.assertNotIn('sensitive-user-id',raw)
   self.assertNotIn('sensitive-message-text',raw)
   self.assertNotIn(self.secret,raw)
+ def test_nontext_event_history_without_personal_data(self):
+  """Read receipts must not hide the prior diagnostic event or leak IDs."""
+  for event_type in ('read','postback'):
+   item={'sender':{'id':'private-user-123'},'recipient':{'id':'17841455555555555'},event_type:{'watermark':'private-watermark'}}
+   data={'object':'instagram','entry':[{'id':'17841455555555555','messaging':[item]}]}
+   body=json.dumps(data).encode()
+   sig='sha256='+hmac.new(self.secret.encode(),body,hashlib.sha256).hexdigest()
+   self.assertEqual(self.req('/api/ig-webhook.php','POST',body,{'Content-Type':'application/json','X-Hub-Signature-256':sig}), (200,'OK'))
+  raw=(self.dir/'private-acpro-meta'/'webhook-status.json').read_text()
+  status=json.loads(raw)
+  self.assertEqual(status['event_types']['postback'],1)
+  self.assertEqual(status['skipped_no_message'],1)
+  self.assertGreaterEqual(len(status['recent_events']),2)
+  self.assertEqual(status['recent_events'][1]['event_types']['read'],1)
+  self.assertNotIn('private-user-123',raw)
+  self.assertNotIn('private-watermark',raw)
  def test_verify(self):
   q=urllib.parse.urlencode({'hub.mode':'subscribe','hub.verify_token':self.verify,'hub.challenge':'123abc'})
   self.assertEqual(self.req('/api/ig-webhook.php?'+q),(200,'123abc'))
