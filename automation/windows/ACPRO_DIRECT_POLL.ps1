@@ -23,6 +23,7 @@ $testSender = [string]$cfg.test_sender_id
 $headers = @{ Authorization = 'Bearer '+$token }
 $stateFile = Join-Path (Split-Path -Parent $cfgPath) 'facebook-direct-state.json'
 $seen = New-Object 'System.Collections.Generic.HashSet[string]'
+$humanThreads = @{}
 $firstStart = [DateTimeOffset]::UtcNow
 $bootstrapped = $false
 if (Test-Path -LiteralPath $stateFile) {
@@ -30,6 +31,7 @@ if (Test-Path -LiteralPath $stateFile) {
         $old = Get-Content -LiteralPath $stateFile -Raw -Encoding UTF8 | ConvertFrom-Json
         $firstStart=[DateTimeOffset]::Parse([string]$old.first_start).ToUniversalTime()
         foreach ($s in @($old.seen_hashes)) { [void]$seen.Add([string]$s) }
+        if ($null -ne $old.human_threads) { foreach ($x in $old.human_threads.PSObject.Properties) { $humanThreads[$x.Name] = [long]$x.Value } }
         $bootstrapped=($old.bootstrapped -eq $true)
     } catch { throw 'Invalid state. Stop and repair the state before restarting to prevent duplicate replies.' }
 }
@@ -42,7 +44,7 @@ function Hash-Id([string]$value) {
 function Save-State {
     $parent=Split-Path -Parent $stateFile
     if (!(Test-Path -LiteralPath $parent)) { New-Item -Type Directory -Path $parent | Out-Null }
-    $out=@{first_start=$firstStart.ToString('o');bootstrapped=$bootstrapped;seen_hashes=@($seen)}
+    $out=@{first_start=$firstStart.ToString('o');bootstrapped=$bootstrapped;seen_hashes=@($seen);human_threads=$humanThreads}
     $tmp=$stateFile+'.tmp'
     $j=ConvertTo-Json -InputObject $out -Depth 4 -Compress
     [System.IO.File]::WriteAllText($tmp,$j,[System.Text.Encoding]::UTF8)
@@ -149,6 +151,7 @@ while ($true) {
             if ($null -eq $conversation.id) {continue}
             Start-Sleep -Milliseconds 600
             $cid=[Uri]::EscapeDataString([string]$conversation.id)
+            $threadHash=Hash-Id ([string]$conversation.id)
             try {$resp=Graph-Get ($cid+'/messages?fields=id,message,from,to,created_time&limit=10')}
             catch {Write-Warning 'Could not fetch one conversation; no sending.';continue}
             $messages=@($resp.data | Where-Object { $null -ne $_ -and $null -ne $_.id -and $null -ne $_.created_time } | Sort-Object { [DateTimeOffset]::Parse([string]$_.created_time) })
@@ -168,7 +171,59 @@ while ($true) {
             $age=[DateTimeOffset]::UtcNow-$created
             if ($created -lt $firstStart -or $age.TotalHours -ge 23 -or $age.TotalSeconds -lt -120) { $blocked++;continue }
             $from=[string]$last.from.id
-            if ($from -notmatch '^[0-9]{5,32}$' -or $from -eq $ownId -or $from -eq $pageId -or !(Has-Recipient $last)) {$blocked++;continue}
+            if ($from -eq $ownId -or $from -eq $pageId) {
+                # A human's outbound reply from the Instagram app pauses the bot.
+                # Bot-sent message IDs are pre-marked seen after successful Send API.
+                $humanThreads[$threadHash]=[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()+86400
+                Save-State
+                continue
+            }
+            if ($humanThreads.ContainsKey($threadHash)) {
+                if ([long]$humanThreads[$threadHash] -gt [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()) { continue }
+                $humanThreads.Remove($threadHash)
+                Save-State
+            }
+            if ($from -notmatch '^[0-9]{5,32}
+            $question=[string]$last.message
+            if ([string]::IsNullOrWhiteSpace($question) -or $question.Length -gt 8000) {$blocked++;continue}
+            $count++
+            $policy=Get-PolicyReply $question
+            if ($null -eq $policy) {
+                try {$policy=@{reply=(Ask-LocalQwen $question);handoff=$false}}
+                catch {$policy=@{reply=($identity+'Не могу надёжно ответить сейчас. Напишите менеджеру в WhatsApp '+$phone+'.');handoff=$true}}
+            }
+            $reply=[string]$policy.reply
+            if ($reply.Length -gt 1000) {$reply=$reply.Substring(0,1000)}
+            if ($mode -ne 'live') {
+                Write-Host ('DRY-RUN: one new incoming Direct processed; ready to reply. Handoff='+[bool]$policy.handoff)
+                continue
+            }
+            if (!$allowAll -and $from -ne $testSender) {
+                Write-Host 'New message from non-test user: no automatic reply.'
+                continue
+            }
+            # At-most-once: persist before sending; ambiguous network errors NEVER auto-retry.
+            try {
+                $sent=Graph-Send $from $reply
+                if ($null -ne $sent.message_id) { [void]$seen.Add((Hash-Id ([string]$sent.message_id))) }
+                if ([bool]$policy.handoff) {
+                    $humanThreads[$threadHash]=[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()+86400
+                }
+                Save-State
+                Write-Host 'A single Instagram Direct reply was accepted by Meta.'
+            } catch {Write-Warning 'Meta did NOT confirm the send; do not retry blindly.'}
+        }
+        if (!$bootstrapped) {
+            $bootstrapped=$true
+            Save-State
+            Write-Host 'Baseline complete. Historical messages skipped. Send a NEW test Direct now.'
+        }
+    } catch {
+        Write-Warning 'Meta polling failed or rate-limited. Pausing without sending.'
+    }
+    Start-Sleep -Seconds $pollSeconds
+}
+ -or !(Has-Recipient $last)) {$blocked++;continue}
             $question=[string]$last.message
             if ([string]::IsNullOrWhiteSpace($question) -or $question.Length -gt 8000) {$blocked++;continue}
             $count++
