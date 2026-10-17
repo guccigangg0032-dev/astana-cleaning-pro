@@ -60,6 +60,11 @@ function Graph-Send([string]$sender,[string]$message) {
     $payload = @{recipient=@{id=$sender};messaging_type='RESPONSE';message=@{text=$message}} | ConvertTo-Json -Compress -Depth 5
     Invoke-RestMethod -Uri ('https://graph.facebook.com/v26.0/'+$pageId+'/messages') -Headers $headers -Method Post -ContentType 'application/json; charset=utf-8' -Body ([Text.Encoding]::UTF8.GetBytes($payload)) -TimeoutSec 30 -ErrorAction Stop
 }
+function Parse-MetaTime([string]$value) {
+    # Meta sometimes writes UTC offsets as +0000, while .NET accepts +00:00.
+    $normalized=$value -replace '([+-])([0-9]{2})([0-9]{2})$', '$1$2:$3'
+    return [DateTimeOffset]::Parse($normalized).ToUniversalTime()
+}
 function Has-Recipient([object]$message) {
     # Facebook Graph 'to' can be an object with data[]; do not guess on absent data.
     $ids=@()
@@ -154,7 +159,7 @@ while ($true) {
             $threadHash=Hash-Id ([string]$conversation.id)
             try {$resp=Graph-Get ($cid+'/messages?fields=id,message,from,to,created_time&limit=10')}
             catch {Write-Warning 'Could not fetch one conversation; no sending.';continue}
-            $messages=@($resp.data | Where-Object { $null -ne $_ -and $null -ne $_.id -and $null -ne $_.created_time } | Sort-Object { [DateTimeOffset]::Parse([string]$_.created_time) })
+            $messages=@($resp.data | Where-Object { $null -ne $_ -and $null -ne $_.id -and $null -ne $_.created_time } | Sort-Object { Parse-MetaTime ([string]$_.created_time) })
             if ($messages.Count -eq 0) {continue}
             foreach ($item in $messages) {
                 $hash=Hash-Id ([string]$item.id)
@@ -167,7 +172,7 @@ while ($true) {
             # Mark all observed messages seen, even ignored/outgoing/unsupported messages.
             foreach($item in $messages) { [void]$seen.Add((Hash-Id ([string]$item.id))) }
             Save-State
-            $created=[DateTimeOffset]::Parse([string]$last.created_time).ToUniversalTime()
+            $created=Parse-MetaTime ([string]$last.created_time)
             $age=[DateTimeOffset]::UtcNow-$created
             if ($created -lt $firstStart -or $age.TotalHours -ge 23 -or $age.TotalSeconds -lt -120) { $blocked++;continue }
             $from=[string]$last.from.id
@@ -183,7 +188,7 @@ while ($true) {
                 $humanThreads.Remove($threadHash)
                 Save-State
             }
-            if ($from -notmatch '^[0-9]{5,32}
+            if ($from -notmatch '^[0-9]{5,32}$' -or !(Has-Recipient $last)) {$blocked++;continue}
             $question=[string]$last.message
             if ([string]::IsNullOrWhiteSpace($question) -or $question.Length -gt 8000) {$blocked++;continue}
             $count++
@@ -212,39 +217,6 @@ while ($true) {
                 Save-State
                 Write-Host 'A single Instagram Direct reply was accepted by Meta.'
             } catch {Write-Warning 'Meta did NOT confirm the send; do not retry blindly.'}
-        }
-        if (!$bootstrapped) {
-            $bootstrapped=$true
-            Save-State
-            Write-Host 'Baseline complete. Historical messages skipped. Send a NEW test Direct now.'
-        }
-    } catch {
-        Write-Warning 'Meta polling failed or rate-limited. Pausing without sending.'
-    }
-    Start-Sleep -Seconds $pollSeconds
-}
- -or !(Has-Recipient $last)) {$blocked++;continue}
-            $question=[string]$last.message
-            if ([string]::IsNullOrWhiteSpace($question) -or $question.Length -gt 8000) {$blocked++;continue}
-            $count++
-            $policy=Get-PolicyReply $question
-            if ($null -eq $policy) {
-                try {$policy=@{reply=(Ask-LocalQwen $question);handoff=$false}}
-                catch {$policy=@{reply=($identity+'Не могу надёжно ответить сейчас. Напишите менеджеру в WhatsApp '+$phone+'.');handoff=$true}}
-            }
-            $reply=[string]$policy.reply
-            if ($reply.Length -gt 1000) {$reply=$reply.Substring(0,1000)}
-            if ($mode -ne 'live') {
-                Write-Host ('DRY-RUN: one new incoming Direct processed; ready to reply. Handoff='+[bool]$policy.handoff)
-                continue
-            }
-            if (!$allowAll -and $from -ne $testSender) {
-                Write-Host 'New message from non-test user: no automatic reply.'
-                continue
-            }
-            # At-most-once: persist before sending; ambiguous network errors NEVER auto-retry.
-            try {Graph-Send $from $reply | Out-Null;Write-Host 'A single Instagram Direct reply was accepted by Meta.'}
-            catch {Write-Warning 'Meta did NOT confirm the send; do not retry blindly.'}
         }
         if (!$bootstrapped) {
             $bootstrapped=$true
