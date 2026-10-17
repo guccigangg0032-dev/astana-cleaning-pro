@@ -40,36 +40,72 @@ if ($raw === false || strlen($raw) > 131072) respond(413, 'Too large');
 $signature = $_SERVER['HTTP_X_HUB_SIGNATURE_256'] ?? '';
 $expected = 'sha256=' . hash_hmac('sha256', $raw, $secret);
 if (!is_string($signature) || !hash_equals($expected, $signature)) respond(403, 'Forbidden');
+// Write only operational counters to a file OUTSIDE the public web root.
+// Never store tokens, user IDs, message contents, raw payload, or sender IPs.
+function saveWebhookStatus(string $configFile, array $status): void {
+    $target = dirname($configFile) . '/webhook-status.json';
+    if (is_link($target)) return;
+    $json = json_encode($status, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    @file_put_contents($target, $json, LOCK_EX);
+    @chmod($target, 0600);
+}
 try { $event = json_decode($raw, true, 32, JSON_THROW_ON_ERROR); }
 catch (JsonException $e) { respond(400, 'Bad JSON'); }
-if (!is_array($event) || ($event['object'] ?? null) !== 'instagram') respond(200, 'OK');
+$log = [
+    'astana_time' => gmdate('Y-m-d H:i:s', time() + 5 * 3600),
+    'signature' => 'valid',
+    'object' => ($event['object'] ?? null) === 'instagram' ? 'instagram' : 'other',
+    'entries' => is_array($event['entry'] ?? null) ? count($event['entry']) : 0,
+    'messaging_events' => 0,
+    'queued' => 0,
+    'skipped_account_id' => 0,
+    'skipped_no_message' => 0,
+    'skipped_echo_or_deleted' => 0,
+    'skipped_missing_text_or_ids' => 0,
+    'skipped_recipient_id' => 0,
+    'skipped_human_lock' => 0,
+    'skipped_duplicate' => 0,
+    'write_failed' => 0,
+];
+if (!is_array($event) || ($event['object'] ?? null) !== 'instagram') {
+    saveWebhookStatus($cfgFile, $log);
+    respond(200, 'OK');
+}
 $queue = dirname($cfgFile) . '/queue';
 if (is_link($queue)) respond(503, 'Storage error');
 if (!is_dir($queue) && !@mkdir($queue, 0700, true) && !is_dir($queue)) respond(503, 'Storage error');
 foreach (($event['entry'] ?? []) as $entry) {
-    if (!is_array($entry) || ($ownAccount !== '' && (string)($entry['id'] ?? '') !== $ownAccount)) continue;
+    if (!is_array($entry)) { $log['skipped_account_id']++; continue; }
+    if ((string)($entry['id'] ?? '') !== $ownAccount) { $log['skipped_account_id']++; continue; }
     foreach (($entry['messaging'] ?? []) as $item) {
-        if (!is_array($item)) continue;
-        $message = $item['message'] ?? null;
-        if (!is_array($message) || !empty($message['is_echo']) || !empty($message['is_deleted'])) continue;
+        $log['messaging_events']++;
+        if (!is_array($item) || !is_array($item['message'] ?? null)) { $log['skipped_no_message']++; continue; }
+        $message = $item['message'];
+        if (!empty($message['is_echo']) || !empty($message['is_deleted'])) { $log['skipped_echo_or_deleted']++; continue; }
         $sender = (string)($item['sender']['id'] ?? '');
         $recipient = (string)($item['recipient']['id'] ?? '');
         $mid = (string)($message['mid'] ?? '');
         $text = $message['text'] ?? null;
-        if ($sender === '' || $recipient === '' || $mid === '' || !is_string($text) || trim($text) === '' || strlen($text) > 8000 || $sender === $ownAccount) continue;
-        if ($ownAccount !== '' && $recipient !== $ownAccount) continue;
+        if ($sender === '' || $recipient === '' || $mid === '' || !is_string($text) || trim($text) === '' || strlen($text) > 8000 || $sender === $ownAccount) { $log['skipped_missing_text_or_ids']++; continue; }
+        if ($recipient !== $ownAccount) { $log['skipped_recipient_id']++; continue; }
         $humanLock = dirname($cfgFile) . '/human-lock/' . hash('sha256', $sender) . '.json';
         if (is_file($humanLock)) {
             $locked = json_decode(file_get_contents($humanLock) ?: '', true);
-            if ((int)($locked['until'] ?? 0) > time()) continue;
+            if ((int)($locked['until'] ?? 0) > time()) { $log['skipped_human_lock']++; continue; }
             @unlink($humanLock);
         }
         $id = hash('sha256', 'instagram|' . $recipient . '|' . $mid);
         $file = $queue . '/' . $id . '.json';
-        if (is_file($file)) continue;
+        if (is_file($file)) { $log['skipped_duplicate']++; continue; }
         $payload = json_encode(['id'=>$id,'channel'=>'instagram_dm','event_id'=>$mid,'conversation_id'=>$sender,'recipient_id'=>$recipient,'text'=>$text,'received_at'=>time()], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
         $handle = @fopen($file, 'x');
-        if ($handle !== false) { @chmod($file, 0600); fwrite($handle, $payload); fclose($handle); }
+        if ($handle === false) { $log['write_failed']++; continue; }
+        @chmod($file, 0600);
+        $bytes = fwrite($handle, $payload);
+        fclose($handle);
+        if ($bytes !== strlen($payload)) { @unlink($file); $log['write_failed']++; continue; }
+        $log['queued']++;
     }
 }
+saveWebhookStatus($cfgFile, $log);
 respond(200, 'OK');
