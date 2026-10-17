@@ -64,14 +64,28 @@ if (($cfg['replies_enabled']??false)!==true) finish(409,['error'=>'REPLIES_DISAB
 $msg=$body['message']??null;
 if (!is_string($msg) || trim($msg)==='' || strlen($msg)>3000) finish(400,['error'=>'INVALID_MESSAGE']);
 if (preg_match('/[₸]|\bKZT\b/i',$msg) && !preg_match('/предвар|ориентир|бастап|алдын ала|preliminar|estimate|\bот\b/iu',$msg)) finish(422,['error'=>'PRICE_DISCLAIMER_REQUIRED']);
-$token=$cfg['instagram_access_token']??null;
-if (!is_string($token) || strlen($token)<30 || str_starts_with($token,'REPLACE_')) finish(503,['error'=>'INSTAGRAM_TOKEN_MISSING']);
+// IMPORTANT: These two login modes use DIFFERENT tokens and Graph API hosts.
+$apiMode=(string)($cfg['api_mode']??'instagram_login');
+if (!in_array($apiMode,['instagram_login','facebook_login'],true)) finish(503,['error'=>'INVALID_API_MODE']);
+if ($apiMode==='facebook_login') {
+    $pageId=(string)($cfg['facebook_page_id']??'');
+    if (!preg_match('/^[0-9]{5,32}$/D',$pageId)) finish(503,['error'=>'FACEBOOK_PAGE_ID_MISSING']);
+    $token=$cfg['facebook_page_access_token']??null;
+    if (!is_string($token) || strlen($token)<30 || str_starts_with($token,'REPLACE_')) finish(503,['error'=>'FACEBOOK_PAGE_TOKEN_MISSING']);
+    $api='https://graph.facebook.com/v26.0/'.$pageId.'/messages';
+} else {
+    $token=$cfg['instagram_access_token']??null;
+    if (!is_string($token) || strlen($token)<30 || str_starts_with($token,'REPLACE_')) finish(503,['error'=>'INSTAGRAM_TOKEN_MISSING']);
+    $api='https://graph.instagram.com/v26.0/me/messages';
+}
 // At-most-once processing: write status before remote send; an ambiguous failure
 // requires manual reconciliation rather than risking duplicate replies.
 file_put_contents($state,json_encode(['status'=>'sending','at'=>time()]),LOCK_EX);
 @chmod($state,0600);
-$api='https://graph.instagram.com/v26.0/me/messages';
-$payload=json_encode(['recipient'=>['id'=>(string)$event['conversation_id']],'message'=>['text'=>$msg]],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+$request=['recipient'=>['id'=>(string)$event['conversation_id']],'message'=>['text'=>$msg]];
+// Facebook Login uses Messenger Platform Send API with a Page token.
+if ($apiMode==='facebook_login') $request['messaging_type']='RESPONSE';
+$payload=json_encode($request,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 $ch=curl_init($api);
 curl_setopt_array($ch,[CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>$payload,CURLOPT_HTTPHEADER=>['Content-Type: application/json','Authorization: Bearer '.$token],CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT=>5,CURLOPT_TIMEOUT=>20]);
 $response=curl_exec($ch);$http=(int)curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);
