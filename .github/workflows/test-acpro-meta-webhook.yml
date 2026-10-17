@@ -5,6 +5,11 @@ on:
     paths:
       - 'automation/**'
       - '.github/workflows/test-acpro-meta-webhook.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - '.github/workflows/test-acpro-meta-webhook.yml'
   workflow_dispatch:
 permissions:
   contents: read
