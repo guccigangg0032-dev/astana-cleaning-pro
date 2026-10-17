@@ -24,6 +24,18 @@ class WebhookTests(unittest.TestCase):
   try:
    with urllib.request.urlopen(req,timeout=3) as r:return r.status,r.read().decode()
   except urllib.error.HTTPError as e:return e.code,e.read().decode()
+ def test_diagnostic_counters_without_private_data(self):
+  payload={'object':'instagram','entry':[{'id':'999999999999','messaging':[{'sender':{'id':'sensitive-user-id'},'recipient':{'id':'999999999999'},'message':{'mid':'private-mid','text':'sensitive-message-text'}}]}]}
+  body=json.dumps(payload).encode()
+  sig='sha256='+hmac.new(self.secret.encode(),body,hashlib.sha256).hexdigest()
+  self.assertEqual(self.req('/api/ig-webhook.php','POST',body,{'Content-Type':'application/json','X-Hub-Signature-256':sig}), (200,'OK'))
+  raw=(self.dir/'private-acpro-meta'/'webhook-status.json').read_text()
+  log=json.loads(raw)
+  self.assertEqual(log['skipped_account_id'],1)
+  self.assertEqual(log['queued'],0)
+  self.assertNotIn('sensitive-user-id',raw)
+  self.assertNotIn('sensitive-message-text',raw)
+  self.assertNotIn(self.secret,raw)
  def test_verify(self):
   q=urllib.parse.urlencode({'hub.mode':'subscribe','hub.verify_token':self.verify,'hub.challenge':'123abc'})
   self.assertEqual(self.req('/api/ig-webhook.php?'+q),(200,'123abc'))
