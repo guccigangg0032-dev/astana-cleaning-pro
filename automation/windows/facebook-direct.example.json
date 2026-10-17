@@ -1,0 +1,10 @@
+{
+  "facebook_page_id": "1353920131143281",
+  "instagram_account_id": "17841423790986385",
+  "facebook_page_access_token": "REPLACE_WITH_NEW_PRIVATE_PAGE_ACCESS_TOKEN",
+  "model": "qwen3.5:4b",
+  "mode": "dry_run",
+  "poll_seconds": 90,
+  "allow_all_inbound": false,
+  "test_sender_id": ""
+}
