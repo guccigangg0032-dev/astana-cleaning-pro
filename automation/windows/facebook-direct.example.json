@@ -4,7 +4,7 @@
   "facebook_page_access_token": "REPLACE_WITH_NEW_PRIVATE_PAGE_ACCESS_TOKEN",
   "model": "qwen3.5:4b",
   "mode": "dry_run",
-  "poll_seconds": 90,
+  "poll_seconds": 60,
   "allow_all_inbound": false,
   "test_sender_id": ""
 }
