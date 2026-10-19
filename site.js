@@ -49,7 +49,7 @@ const steps=(arr)=>'<div class="steps-grid">'+arr.map(p=>'<div class="step"><h3>
 const home=()=>'<section class="hero section hero-calc"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">'+t.home.tag+'</div><h1>'+t.home.title+'<br><em>'+t.home.accent+'</em></h1><p class="hero-lead">'+t.home.intro+'</p><div class="hero-buttons">'+link(t.viewServices,href('services'),'btn btn-secondary')+'</div><div class="hero-points">'+t.home.points.map(x=>'<span>✓ '+x+'</span>').join('')+'</div></div>'+
 '<div class="hero-calculator"><div class="hero-calc-head"><span class="kicker">'+t.quickEstimate.tag+'</span><h2>'+t.quickEstimate.title+'</h2><p>'+t.quickEstimate.lead+'</p></div>'+
 '<form id="quickForm" class="hero-calc-form" autocomplete="off"><label for="quickService">'+t.quickEstimate.type+'</label><select id="quickService" name="service" required><option value="maintenance">'+t.quickEstimate.types[0]+'</option><option value="general" selected>'+t.quickEstimate.types[1]+'</option><option value="renovation">'+t.quickEstimate.types[2]+'</option></select>'+
-'<label for="quickArea">'+t.quickEstimate.area+'</label><div class="quick-area-group"><input type="number" id="quickArea" name="area" inputmode="numeric" min="20" max="2000" step="1" value="55" required><span>м²</span></div>'+
+'<label for="quickArea">'+t.quickEstimate.area+'</label><div class="quick-area-group"><input type="number" id="quickArea" name="area" inputmode="numeric" min="20" max="2000" step="1" value="55" required><span>м²</span></div><input type="range" id="quickAreaRange" min="20" max="250" step="5" value="55" aria-label="Площадь помещения" style="display:block;width:100%;margin:12px 0 6px;accent-color:#0d9488">'+
 '<div class="quick-result" role="status" aria-live="polite"><span>'+t.quickEstimate.price+'</span><strong id="quickPrice">'+money(49500)+'</strong></div>'+
 '<p class="quick-info">'+t.quickEstimate.notice+'</p><button type="submit" class="btn btn-primary quick-submit">'+t.quickEstimate.send+' ↗</button>'+
 '<a class="quick-details" id="quickDetails" href="'+href('prices')+'">'+t.quickEstimate.details+' ↗</a><small class="quick-legal">'+t.quickEstimate.footer+' '+t.quickEstimate.note+'</small></form></div></div></section>'+
@@ -170,7 +170,7 @@ function wirePartners(){
 }
 function wireQuickEstimator(){
  const form=document.getElementById('quickForm');if(!form)return;
- const svc=document.getElementById('quickService'),areaEl=document.getElementById('quickArea'),out=document.getElementById('quickPrice'),detail=document.getElementById('quickDetails');
+ const svc=document.getElementById('quickService'),areaEl=document.getElementById('quickArea'),rangeEl=document.getElementById('quickAreaRange'),out=document.getElementById('quickPrice'),detail=document.getElementById('quickDetails');
  const plans={maintenance:{rate:400,min:18000,index:0},general:{rate:900,min:38000,index:1},renovation:{rate:1200,min:52000,index:2}};
  function current(){
   const service=Object.hasOwn(plans,svc.value)?svc.value:'general';
@@ -181,6 +181,7 @@ function wireQuickEstimator(){
  function update(){
   const state=current();
   out.textContent=money(state.amount);
+  if(rangeEl)rangeEl.value=String(Math.min(250,state.area));
   const url=new URL(href('prices'),location.href);
   url.searchParams.set('service',state.service);
   url.searchParams.set('area',String(state.area));
@@ -188,6 +189,7 @@ function wireQuickEstimator(){
  }
  svc.addEventListener('change',update);
  areaEl.addEventListener('input',update);
+ if(rangeEl)rangeEl.addEventListener('input',()=>{areaEl.value=rangeEl.value;update()});
  areaEl.addEventListener('blur',()=>{areaEl.value=String(current().area);update()});
  form.addEventListener('submit',e=>{
   e.preventDefault();
